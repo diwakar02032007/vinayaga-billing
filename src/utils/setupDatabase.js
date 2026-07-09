@@ -16,13 +16,29 @@ function cleanSchemaSql(schemaSql) {
     .filter(Boolean);
 }
 
+function getSchemaPath() {
+  const preferred = path.join(__dirname, '..', '..', 'database', 'schema-aiven-defaultdb.sql');
+  const fallback = path.join(__dirname, '..', '..', 'database', 'schema.sql');
+  if (fs.existsSync(preferred)) return preferred;
+  return fallback;
+}
+
 async function runSchema(conn) {
-  const schemaPath = path.join(__dirname, '..', '..', 'database', 'schema.sql');
+  const schemaPath = getSchemaPath();
   const schemaSql = fs.readFileSync(schemaPath, 'utf8');
   const statements = cleanSchemaSql(schemaSql);
 
   for (const statement of statements) {
-    await conn.query(statement);
+    try {
+      await conn.query(statement);
+    } catch (error) {
+      // MySQL does not support CREATE INDEX IF NOT EXISTS in older versions.
+      // If auto setup runs again, duplicate index errors are safe to ignore.
+      if (error && (error.code === 'ER_DUP_KEYNAME' || error.errno === 1061)) {
+        continue;
+      }
+      throw error;
+    }
   }
 }
 
