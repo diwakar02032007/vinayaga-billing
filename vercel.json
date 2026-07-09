@@ -1,7 +1,12 @@
 {
   "version": 2,
-  "buildCommand": "npm install",
+  "buildCommand": "npm run vercel-build",
   "outputDirectory": "public",
+  "functions": {
+    "api/index.js": {
+      "includeFiles": "database/**"
+    }
+  },
   "rewrites": [
     {
       "source": "/api/(.*)",
