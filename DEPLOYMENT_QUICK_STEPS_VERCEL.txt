@@ -1,0 +1,15 @@
+VERCEL + AIVEN QUICK STEPS
+
+1. Upload this full folder to GitHub repo: vinayaga-billing
+2. Go to vercel.com
+3. Add New Project
+4. Import GitHub repo: vinayaga-billing
+5. Framework Preset: Other
+6. Install Command: npm install
+7. Build Command: npm install
+8. Output Directory: public
+9. Add environment variables from README_DEPLOY_VERCEL_AIVEN.md
+10. Deploy
+11. Open Vercel link
+12. Login with admin@billing.local / admin123
+13. Change AUTO_DB_SETUP=false and redeploy

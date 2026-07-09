@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GST BillPro Premium UI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <section id="loginScreen" class="login-screen">
+    <div class="login-shell">
+      <div class="login-hero">
+        <div class="hero-copy">
+          <h1>Smart Billing.<br><span>Smarter Business.</span></h1>
+          <p>Manage GST invoices, stock, and reports<br>seamlessly in one powerful platform.</p>
+        </div>
+        <div class="hero-visual">
+          <div class="float-chip chip-left-top"><span>▣</span><strong>GST Invoices</strong></div>
+          <div class="float-chip chip-left-bottom"><span>▥</span><strong>Analytics</strong></div>
+          <div class="float-chip chip-right-top"><span>◈</span><strong>Stock Control</strong></div>
+          <div class="float-chip chip-right-bottom"><span>▰</span><strong>Thermal Print</strong></div>
+          <div class="mock-laptop">
+            <div class="mock-sidebar">
+              <b>₹ GST BillPro</b>
+              <span class="mock-active">Dashboard</span>
+              <span>Billing</span><span>Stock Management</span><span>Invoice History</span><span>Reports</span><span>Settings</span>
+            </div>
+            <div class="mock-screen">
+              <h3>Dashboard Overview</h3>
+              <div class="mock-stat-row"><b>₹12,450.00</b><b>156</b><b class="danger-text">8</b></div>
+              <div class="mock-table-title">Recent Invoices</div>
+              <div class="mock-line"></div><div class="mock-line short"></div><div class="mock-line"></div>
+            </div>
+          </div>
+          <div class="invoice-roll"><b>TAX INVOICE</b><span>PAID</span></div>
+          <div class="growth-bars"><i></i><i></i><i></i><i></i></div>
+          <div class="box-stack"><i></i><i></i><i></i></div>
+        </div>
+      </div>
+
+      <div class="login-panel">
+        <div class="login-card">
+          <div class="login-logo">₹</div>
+          <div class="login-brand">
+            <h1>GST <span>BillPro</span></h1>
+            <p>GST Billing • Stock • Thermal</p>
+          </div>
+          <form id="loginForm" class="login-form">
+            <label>Email
+              <div class="input-icon"><span>✉</span><input type="email" id="loginEmail" placeholder="Enter your email" value="admin@billing.local" required /></div>
+            </label>
+            <label>Password
+              <div class="input-icon"><span>🔒</span><input type="password" id="loginPassword" placeholder="Enter your password" value="admin123" required /><em>◉</em></div>
+            </label>
+            <div class="login-row"><label class="remember"><input type="checkbox" /> Remember me</label><a href="#">Forgot password?</a></div>
+            <button type="submit" class="login-btn">Login</button>
+            <p id="loginError" class="login-error"></p>
+            <div class="secure-note">🛡 Secure admin access. All data is encrypted.</div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="login-footer">🛡 Secure • Reliable • Built for Indian Businesses</div>
+  </section>
+
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">₹</div>
+        <div>
+          <h1>GST BillPro</h1>
+          <p>Billing • Stock • Thermal</p>
+        </div>
+      </div>
+      <nav class="side-nav">
+        <button class="nav-btn active" data-tab="billing"><span>▤</span> Billing</button>
+        <button class="nav-btn" data-tab="stock"><span>◇</span> Stock Management</button>
+        <button class="nav-btn" data-tab="history"><span>◷</span> Invoice History</button>
+        <button class="nav-btn" data-tab="settings"><span>▥</span> Business Settings</button>
+        <button class="nav-btn" data-tab="printSupport"><span>▣</span> Print Support</button>
+      </nav>
+
+      <div class="sidebar-note">
+        <div class="note-icon">♬</div>
+        <strong>Print Support</strong>
+        <span>A4 GST invoice and 80mm thermal invoice layouts included.</span>
+        <div class="mini-printer"><i></i><b>TAX INVOICE</b><em>PAID</em></div>
+        <button class="side-outline" type="button" onclick="document.querySelector('[data-tab=printSupport]').click()">View Templates</button>
+      </div>
+
+      <button class="sidebar-logout" id="sidebarLogoutBtn">↪ Logout</button>
+    </aside>
+
+    <main class="main">
+      <section class="tab-section active" id="billing">
+        <div class="page-top">
+          <div>
+            <h2>GST Invoice Billing Dashboard</h2>
+            <p>Create, manage and track your GST invoices with ease.</p>
+          </div>
+          <div class="top-tools">
+            <div class="search-box">⌕ <input placeholder="Search invoices, products, customers..." /></div>
+            <button class="outline-action" id="newInvoiceBtn">＋ New Bill</button>
+            <button class="primary-action" id="saveInvoiceBtn">▣ Save Invoice</button>
+            <div class="profile-chip"><span>VT</span><b>Salem</b>⌄</div>
+          </div>
+        </div>
+
+        <section class="stats-grid">
+          <article class="stat-card"><div class="stat-icon blue">▥</div><span>Today Sales</span><strong id="todaySales">₹0.00</strong><small class="green-text">↑ 18.5% from yesterday</small></article>
+          <article class="stat-card"><div class="stat-icon green">◇</div><span>Total Products</span><strong id="totalProducts">0</strong><small>All active products</small></article>
+          <article class="stat-card"><div class="stat-icon orange">!</div><span>Low Stock Items</span><strong id="lowStockCount">0</strong><small>Need attention</small></article>
+          <article class="stat-card"><div class="stat-icon purple">▤</div><span>Total Invoices</span><strong id="totalInvoices">0</strong><small>This month</small></article>
+        </section>
+
+        <div class="billing-grid">
+          <div class="card customer-card">
+            <div class="card-title"><span>♙</span><h3>Customer & Billing Details</h3></div>
+            <div class="form-grid two">
+              <label>Customer Name<input id="customerName" placeholder="Rahul Enterprises" /></label>
+              <label>Phone Number<input id="customerPhone" placeholder="9876543210" /></label>
+              <label class="full">Billing Address<textarea id="customerAddress" rows="3" placeholder="12, MG Road, Ernakulam, Kerala - 682011"></textarea></label>
+              <label>Customer Email<input id="customerEmail" placeholder="customer@example.com" /></label>
+              <label>Customer GSTIN<input id="customerGstin" placeholder="32AABBA7890B1ZB" /></label>
+              <label>Place of Supply<input id="placeOfSupply" placeholder="Kerala (32)" /></label>
+              <label>GST Type<select id="taxType"><option value="CGST_SGST" selected>CGST + SGST (Tamil Nadu)</option></select></label>
+            </div>
+          </div>
+
+          <div class="card invoice-meta-card">
+            <div class="card-title"><span>▦</span><h3>Invoice Details</h3></div>
+            <div class="form-grid two compact">
+              <label>Invoice No.<input id="invoiceNo" readonly /></label>
+              <label>Invoice Date<input id="invoiceDate" type="date" /></label>
+              <label>Challan No.<input id="challanNo" placeholder="33" /></label>
+              <label>Challan Date<input id="challanDate" type="date" /></label>
+              <label>E-Way Bill No.<input id="ewayBill" placeholder="Optional" /></label>
+              <label>Transport<input id="transport" placeholder="Silver Roadlines" /></label>
+            </div>
+          </div>
+
+          <div class="card add-items-card">
+            <div class="card-title with-action"><div><span>🛒</span><h3>Add Billing Items</h3></div><button class="micro-btn" id="manualItemBtn">Manual Item</button></div>
+            <div class="item-entry">
+              <label>Select Product<select id="productSelect"></select></label>
+              <label>Item Name<input id="itemName" placeholder="Product name" /></label>
+              <label>HSN / SAC<input id="itemHsn" placeholder="8302" /></label>
+              <label>Unit<input id="itemUnit" placeholder="NOS" /></label>
+              <label>Qty<input id="itemQty" type="number" min="1" value="1" /></label>
+              <label>Rate (₹)<input id="itemRate" type="number" min="0" step="0.01" placeholder="0.00" /></label>
+              <label>GST %<input id="itemGst" type="number" min="0" step="0.01" value="18" /></label>
+              <button class="primary-action add-btn" id="addItemBtn">Add Item</button>
+            </div>
+            <div class="table-wrap compact-table billing-cart-wrap">
+              <table class="billing-cart-table">
+                <colgroup>
+                  <col class="cart-col-sno" />
+                  <col class="cart-col-product" />
+                  <col class="cart-col-hsn" />
+                  <col class="cart-col-unit" />
+                  <col class="cart-col-qty" />
+                  <col class="cart-col-rate" />
+                  <col class="cart-col-taxable" />
+                  <col class="cart-col-gst" />
+                  <col class="cart-col-total" />
+                  <col class="cart-col-action" />
+                </colgroup>
+                <thead><tr><th>#</th><th>Product / Service</th><th>HSN / SAC</th><th>Unit</th><th>Qty</th><th>Rate (₹)</th><th>Taxable (₹)</th><th>GST (₹)</th><th>Total (₹)</th><th>Action</th></tr></thead>
+                <tbody id="cartBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card summary-card-ui">
+            <div class="card-title"><span>▣</span><h3>Bill Summary</h3></div>
+            <div class="summary-row"><span>Taxable Amount</span><strong id="summaryTaxable">₹0.00</strong></div>
+            <div class="summary-row"><span>Total GST</span><strong id="summaryTax">₹0.00</strong></div>
+            <div class="summary-row"><span>Round Off</span><strong id="summaryRoundOff">₹0.00</strong></div>
+            <div class="summary-row grand"><span>Grand Total</span><strong id="summaryGrand">₹0.00</strong></div>
+            <div class="summary-row paid"><span>Paid Amount</span><strong id="summaryPaid">₹0.00</strong></div>
+            <div class="summary-row balance"><span>Balance Due</span><strong id="summaryBalance">₹0.00</strong></div>
+            <button class="primary-action full-btn" id="printA4Btn">▣ Print A4 GST Invoice</button>
+            <button class="outline-action full-btn" id="printThermalBtn">▣ Print Thermal Bill</button>
+          </div>
+
+          <div class="card payment-card">
+            <div class="card-title"><span>▣</span><h3>Payment & Notes</h3></div>
+            <div class="form-grid two">
+              <label>Payment Mode<select id="paymentMode"><option>Cash</option><option>UPI</option><option>Card</option><option>Credit</option><option>Bank Transfer</option></select></label>
+              <label>Paid Amount (₹)<input id="paidAmount" type="number" min="0" step="0.01" value="0" /></label>
+              <label class="full">Terms / Notes<textarea id="invoiceNotes" rows="3"></textarea></label>
+            </div>
+          </div>
+
+          <div class="card live-stock-card">
+            <div class="card-title with-action"><div><span>◇</span><h3>Available Stock <small>(Live)</small></h3></div><button class="micro-btn" onclick="document.querySelector('[data-tab=stock]').click()">View All Stock</button></div>
+            <div class="table-wrap"><table><thead><tr><th>Product</th><th>HSN / SAC</th><th>Unit</th><th>Rate (₹)</th><th>GST %</th><th>Stock</th><th>Status</th><th>Action</th></tr></thead><tbody id="billingStockBody"></tbody></table></div>
+          </div>
+        </div>
+
+        <div class="card history-mini-card">
+          <div class="card-title"><span>▤</span><h3>Recent Invoice History</h3></div>
+          <div class="table-wrap"><table><thead><tr><th>Invoice No.</th><th>Date</th><th>Customer</th><th>Items</th><th>Total (₹)</th><th>Paid (₹)</th><th>Balance (₹)</th><th>Status</th><th>Actions</th></tr></thead><tbody id="billingHistoryBody"></tbody></table></div>
+        </div>
+      </section>
+
+      <section class="tab-section" id="stock">
+        <div class="page-top"><div><h2>Stock Management</h2><p>Manage your products, stock levels, and inventory settings.</p></div><div class="top-tools"><div class="search-box">⌕ <input placeholder="Search products, HSN, SKU..." /></div><button class="primary-action" onclick="document.getElementById('stockName').focus()">＋ Add New Product</button><div class="profile-chip"><span>VT</span><b>Salem</b>⌄</div></div></div>
+        <section class="stats-grid stock-stats"><article class="stat-card"><div class="stat-icon blue">◇</div><span>Total Products</span><strong id="stockTotalProducts">0</strong><small>All active products</small></article><article class="stat-card"><div class="stat-icon green">₹</div><span>Stock Value</span><strong id="stockValue">₹0.00</strong><small class="green-text">↑ 12.6% from last month</small></article><article class="stat-card"><div class="stat-icon orange">!</div><span>Low Stock Items</span><strong id="stockLowCount">0</strong><small>Need attention</small></article><article class="stat-card"><div class="stat-icon red">−</div><span>Out of Stock</span><strong id="stockOutCount">0</strong><small>Currently unavailable</small></article></section>
+        <div class="card stock-form-card"><div class="card-title"><span>◇</span><h3>Add / Update Product Stock</h3></div><input type="hidden" id="stockProductId" /><div class="form-grid four"><label>Product Name <b>*</b><input id="stockName" placeholder="Enter product name" /></label><label>HSN / SAC <b>*</b><input id="stockHsn" placeholder="Enter HSN or SAC" /></label><label>Unit <b>*</b><input id="stockUnit" placeholder="NOS" /></label><label>Rate (₹) <b>*</b><input id="stockRate" type="number" step="0.01" placeholder="0.00" /></label><label>GST % <b>*</b><input id="stockGst" type="number" step="0.01" value="18" /></label><label>Stock Qty <b>*</b><input id="stockQty" type="number" step="1" value="1" /></label><label>Low Stock Alert <b>*</b><input id="stockLow" type="number" step="1" value="5" /></label><label>SKU <small>(Optional)</small><input id="stockSku" placeholder="Enter SKU (optional)" /></label></div><div class="form-actions"><button class="primary-action" id="saveProductBtn">▣ Save Product</button><button class="outline-action" id="clearProductFormBtn">↻ Clear Form</button></div></div>
+        <div class="card stock-table-card"><div class="card-title with-action"><div><span>◇</span><h3>Available Stock</h3></div><div class="table-tools"><div class="search-box small-search">⌕ <input placeholder="Search in stock..." /></div><button class="outline-action">⌁ Filter</button></div></div><div class="table-wrap"><table><thead><tr><th>Product</th><th>HSN</th><th>Unit</th><th>Rate (₹)</th><th>GST %</th><th>Stock</th><th>Low Alert</th><th>Status</th><th>Action</th></tr></thead><tbody id="stockBody"></tbody></table></div><div class="table-footer"><span id="stockShowingText">Showing products</span><div class="pagination"><button>‹</button><button class="active">1</button><button>2</button><button>3</button><button>4</button><button>5</button><span>...</span><button>32</button><button>›</button></div></div></div>
+      </section>
+
+      <section class="tab-section" id="history">
+        <div class="page-top"><div><h2>Invoice History</h2><p>Saved bills from backend database.</p></div><div class="top-tools"><div class="search-box">⌕ <input id="historySearchInput" placeholder="Search by invoice no., customer, mobile..." /></div><div class="date-filter-wrap"><button class="date-pill" id="historyDateToggle" type="button">▣ <span id="historyDateLabel">All dates</span>⌄</button><div class="date-filter-panel hidden" id="historyDatePanel"><label>From<input id="historyFromDate" type="date" /></label><label>To<input id="historyToDate" type="date" /></label><div class="date-filter-actions"><button class="primary-action small-action" id="historyApplyDateBtn" type="button">Apply</button><button class="outline-action small-action" id="historyClearDateBtn" type="button">All Dates</button></div></div></div><button class="danger-outline" id="clearHistoryBtn">▱ Clear History</button><div class="profile-chip"><span>VT</span><b>Salem</b>⌄</div></div></div>
+        <section class="stats-grid"><article class="stat-card"><div class="stat-icon purple">▤</div><span>Total Invoices</span><strong id="historyTotalInvoices">0</strong><small>This month</small></article><article class="stat-card"><div class="stat-icon green">✓</div><span>Paid Invoices</span><strong id="historyPaidInvoices">0</strong><small>Paid / completed</small></article><article class="stat-card"><div class="stat-icon orange">₹</div><span>Pending Balance</span><strong id="historyPendingBalance">₹0.00</strong><small>Across invoices</small></article><article class="stat-card"><div class="stat-icon red">×</div><span>Cancelled Bills</span><strong id="historyCancelledBills">0</strong><small>Cancelled count</small></article></section>
+        <div class="card history-table-card"><div class="table-wrap"><table class="invoice-history-table"><thead><tr><th>Invoice No.</th><th>Date</th><th>Customer</th><th>Items</th><th>Total (₹)</th><th>Paid (₹)</th><th>Balance (₹)</th><th>Status</th><th>Bill Action</th></tr></thead><tbody id="historyBody"></tbody></table></div><div class="table-footer"><span id="historyShowingText">Showing invoices</span><div class="pagination" id="historyPagination"></div><select id="historyPageSize" class="outline-action page-size-select"><option value="12">12 per page</option><option value="25">25 per page</option><option value="50">50 per page</option><option value="100">100 per page</option></select></div></div>
+      </section>
+
+      <section class="tab-section" id="settings">
+        <div class="page-top"><div><h2>Business Settings</h2><p>Manage company profile, bank details, UPI QR and invoice identity.</p></div><div class="top-tools"><div class="search-box">⌕ <input placeholder="Search settings..." /></div><div class="profile-chip"><span>VT</span><b>Salem</b>⌄</div></div></div>
+        <div class="settings-layout"><div class="card settings-card"><div class="card-title"><span>▥</span><h3>Company Details</h3></div><div class="form-grid two"><label>Business Name<input id="businessName" /></label><label>Business Tagline<input id="businessTagline" /></label><label>GSTIN<input id="businessGstin" /></label><label>Phone<input id="businessPhone" /></label><label>Email<input id="businessEmail" /></label><label>Website<input id="businessWebsite" /></label><label class="full">Business Address<textarea id="businessAddress" rows="3"></textarea></label></div></div><div class="card settings-card"><div class="card-title"><span>₹</span><h3>Bank & Payment</h3></div><div class="form-grid two"><label>Bank Name<input id="bankName" /></label><label>Account Number<input id="bankAccount" /></label><label>IFSC Code<input id="bankIfsc" /></label><label>UPI ID<input id="upiId" /></label><label class="full">Upload UPI QR<input id="qrUpload" type="file" accept="image/*" /></label></div><div class="form-actions"><button class="primary-action" id="saveSettingsBtn">Save Settings</button><button class="outline-action" id="resetDemoBtn">Reset Demo Data</button></div></div></div>
+      </section>
+
+      <section class="tab-section" id="printSupport">
+        <div class="page-top"><div><h2>Print Support</h2><p>Tools, guides and resources to help you print GST invoices perfectly.</p></div><div class="top-tools"><div class="search-box">⌕ <input placeholder="Search invoices, products, customers..." /></div><div class="profile-chip"><span>VT</span><b>Salem</b>⌄</div></div></div>
+        <div class="print-grid"><div class="card print-preview-card"><div class="card-title"><span class="stat-icon purple">▤</span><div><h3>A4 GST Invoice</h3><small>Standard A4 size for full GST tax invoices</small></div></div><div class="a4-mini-preview"><img src="assets/reference/a4-invoice-ui.png" alt="A4 GST Invoice preview"></div><div class="split-actions"><button class="outline-action" id="supportPreviewA4Btn">◎ Preview A4</button><button class="primary-action" id="supportPrintA4Btn">▣ Test Print (A4)</button></div></div><div class="card print-preview-card"><div class="card-title"><span class="stat-icon green">▤</span><div><h3>Thermal Bill (80mm)</h3><small>Optimized for 80mm thermal printers</small></div></div><div class="thermal-mini-preview"><img src="assets/reference/thermal-receipt-ui.png" alt="Thermal bill preview"></div><div class="split-actions"><button class="outline-action" id="supportPreviewThermalBtn">◎ Preview Thermal</button><button class="green-action" id="supportPrintThermalBtn">▣ Test Print (Thermal)</button></div></div><div class="card quick-tools-card"><div class="card-title"><span>🛠</span><h3>Quick Tools</h3></div><div class="tool-list"><div><b>▣ Printer Setup Guide</b><span>Step-by-step setup for A4 & Thermal</span></div><div><b>▣ Download Setup Tips</b><span>PDF guide for print setup & best practices</span></div><div><b>⚙ Open Print Settings</b><span>Configure margins, scaling & layout</span></div><div><b>▣ Print Test Page</b><span>Print a sample page to check alignment</span></div></div></div><div class="card printer-setup-card"><div class="card-title"><span>⚙</span><h3>Printer Setup</h3></div><div class="setup-list"><p><b>Page Size</b><span>A4 (210 × 297 mm) for invoices / 80mm for thermal bills</span></p><p><b>Margins</b><span>Left: 10mm, Right: 10mm, Top: 10mm, Bottom: 10mm</span></p><p><b>Scaling</b><span>Actual Size (100%) - Do not fit to page / Do not scale</span></p><p><b>Browser Print Settings</b><span>Headers & Footers: Off • Background Graphics: On • Print Background Colors: On</span></p><em>Tip: Always preview before printing and use a test print when changing settings.</em></div></div><div class="card print-issues-card"><div class="card-title"><span class="orange-text">⚠</span><h3>Common Print Issues</h3></div><div class="issues-list"><p><b>Extra blank page after invoice</b><span>Adjust bottom margin and uncheck “Fit to page”.</span><button>View Fix</button></p><p><b>Logo or image not printing</b><span>Enable background graphics and allow images.</span><button>View Fix</button></p><p><b>Thermal width mismatch</b><span>Select 80mm paper size and 72mm content width.</span><button>View Fix</button></p><p><b>Content cut or misaligned</b><span>Check margins, reduce font size and test again.</span><button>View Fix</button></p></div></div></div>
+      </section>
+
+      <footer class="app-footer">🛡 Secure • Reliable • Built for Indian Businesses</footer>
+    </main>
+  </div>
+
+  <div id="a4Invoice" class="print-area"></div>
+  <div id="thermalInvoice" class="print-area thermal"></div>
+
+  <template id="emptyRowTemplate"><tr><td colspan="10" class="empty">No items added yet.</td></tr></template>
+  <script src="app.js"></script>
+</body>
+</html>

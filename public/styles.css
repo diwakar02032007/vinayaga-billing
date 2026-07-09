@@ -1,0 +1,3901 @@
+:root {
+  --navy: #06142f;
+  --navy-2: #081b3e;
+  --blue: #0d6efd;
+  --blue-2: #0057e7;
+  --cyan: #07a7c7;
+  --green: #14a44d;
+  --orange: #ff8a00;
+  --red: #ff3030;
+  --purple: #7657ff;
+  --bg: #f6f9fe;
+  --card: #ffffff;
+  --text: #071633;
+  --muted: #64718a;
+  --line: #dfe8f5;
+  --shadow: 0 16px 36px rgba(9, 27, 65, 0.08);
+  --shadow-soft: 0 8px 22px rgba(9, 27, 65, 0.06);
+  --radius: 18px;
+  --font: Inter, Segoe UI, Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; font-family: var(--font); color: var(--text); background: var(--bg); }
+button, input, select, textarea { font-family: inherit; }
+button { cursor: pointer; }
+.hidden { display: none !important; }
+
+/* LOGIN */
+.login-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  background: radial-gradient(circle at 8% 0%, #eaf5ff, transparent 33%), linear-gradient(135deg, #eff7ff, #ffffff 58%, #f4f9ff);
+}
+.login-shell {
+  width: min(1700px, 96vw);
+  height: min(840px, 86vh);
+  display: grid;
+  grid-template-columns: 1.08fr .86fr;
+  background: #fff;
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: 0 26px 80px rgba(12, 33, 75, .13);
+  border: 1px solid rgba(210, 222, 241, .8);
+}
+.login-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 62px 64px;
+  background:
+    radial-gradient(circle at 66% 40%, rgba(0, 113, 255, .22), transparent 35%),
+    radial-gradient(circle at 28% 90%, rgba(10, 132, 255, .14), transparent 32%),
+    linear-gradient(135deg, #04122c 0%, #0a2555 100%);
+  color: #fff;
+}
+.login-hero::before,
+.sidebar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: .24;
+  background-image:
+    radial-gradient(circle, rgba(31, 137, 255, .55) 1.2px, transparent 1.4px),
+    linear-gradient(120deg, transparent 0 45%, rgba(0,123,255,.22) 46%, transparent 47% 100%);
+  background-size: 42px 42px, 100% 100%;
+  pointer-events: none;
+}
+.hero-copy { position: relative; z-index: 2; }
+.hero-copy h1 { margin: 0; font-size: clamp(46px, 4.2vw, 74px); line-height: 1.05; letter-spacing: -.045em; font-weight: 900; }
+.hero-copy h1 span { color: #0e7cff; }
+.hero-copy p { margin: 24px 0 0; color: #dce8fb; font-size: clamp(17px, 1.5vw, 23px); line-height: 1.5; }
+.hero-visual { position: absolute; left: 54px; right: 44px; bottom: 45px; height: 56%; z-index: 2; }
+.mock-laptop {
+  position: absolute; left: 190px; right: 120px; bottom: 90px; height: 270px;
+  border: 8px solid #172e5b; border-bottom-width: 22px; border-radius: 24px;
+  background: #f9fbff; display: grid; grid-template-columns: 160px 1fr;
+  box-shadow: 0 28px 60px rgba(0,0,0,.38), inset 0 0 0 1px rgba(255,255,255,.4);
+}
+.mock-sidebar { background: #071936; color: #d8e7ff; padding: 20px 14px; display: flex; flex-direction: column; gap: 11px; font-size: 12px; }
+.mock-sidebar b { color: #fff; margin-bottom: 8px; }
+.mock-sidebar span { padding: 7px 9px; border-radius: 8px; }
+.mock-sidebar .mock-active { background: #126bff; color: #fff; }
+.mock-screen { padding: 22px; color: #0c1830; }
+.mock-screen h3 { margin: 0 0 18px; font-size: 16px; }
+.mock-stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.mock-stat-row b { background: #f5f8fd; padding: 18px 12px; border-radius: 12px; color: #086bff; box-shadow: var(--shadow-soft); }
+.mock-table-title { margin: 20px 0 12px; font-weight: 800; }
+.mock-line { height: 18px; border-radius: 99px; background: #eaf0f8; margin: 10px 0; }
+.mock-line.short { width: 72%; }
+.float-chip {
+  position: absolute; width: 120px; height: 120px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+  border-radius: 22px; color: #fff; background: rgba(16, 73, 151, .55); border: 1px solid rgba(91, 162, 255, .55); box-shadow: 0 0 35px rgba(0, 110, 255, .25); backdrop-filter: blur(8px);
+}
+.float-chip span { font-size: 40px; color: #2490ff; }
+.float-chip strong { font-size: 13px; }
+.chip-left-top { left: 0; bottom: 250px; }
+.chip-left-bottom { left: 0; bottom: 78px; }
+.chip-right-top { right: 0; bottom: 296px; }
+.chip-right-bottom { right: 0; bottom: 126px; }
+.invoice-roll { position: absolute; left: 180px; bottom: 12px; width: 175px; height: 125px; background: #fff; color: #1d2b43; border-radius: 12px 12px 42px 16px; padding: 28px 24px; box-shadow: 0 18px 35px rgba(0,0,0,.25); transform: rotate(-3deg); }
+.invoice-roll span { display: inline-block; color: #086bff; border: 4px solid #086bff; font-weight: 900; font-size: 22px; transform: rotate(-9deg); margin-top: 15px; padding: 2px 8px; }
+.growth-bars { position: absolute; right: 84px; bottom: 38px; display: flex; gap: 14px; align-items: end; }
+.growth-bars i { width: 42px; border-radius: 10px 10px 0 0; background: linear-gradient(#4fa3ff, #075eff); box-shadow: 0 8px 18px rgba(0,90,255,.35); }
+.growth-bars i:nth-child(1) { height: 70px; } .growth-bars i:nth-child(2) { height: 100px; } .growth-bars i:nth-child(3) { height: 134px; } .growth-bars i:nth-child(4) { height: 172px; }
+.box-stack { position: absolute; left: 430px; bottom: 34px; width: 170px; height: 110px; }
+.box-stack i { position: absolute; width: 70px; height: 56px; background: linear-gradient(#d5a36d, #a87345); border-radius: 8px; box-shadow: 0 14px 22px rgba(0,0,0,.2); }
+.box-stack i:nth-child(1) { left: 0; bottom: 0; } .box-stack i:nth-child(2) { left: 66px; bottom: 0; } .box-stack i:nth-child(3) { left: 42px; bottom: 54px; }
+.login-panel { display: grid; place-items: center; padding: 56px; background: radial-gradient(circle at 100% 0%, #eff8ff, #fff 48%); }
+.login-card { width: min(560px, 100%); background: #fff; border: 1px solid #dfe8f5; border-radius: 28px; padding: 48px 44px; box-shadow: 0 20px 54px rgba(10, 32, 72, .10); }
+.login-logo { margin: 0 auto 24px; width: 96px; height: 96px; display: grid; place-items: center; border-radius: 24px; color: #fff; font-size: 50px; font-weight: 900; background: linear-gradient(135deg, #086bff, #08b6b9); box-shadow: 0 22px 42px rgba(0, 111, 255, .24); }
+.login-brand { text-align: center; margin-bottom: 36px; }
+.login-brand h1 { margin: 0; font-size: 42px; letter-spacing: -.04em; color: var(--text); }
+.login-brand h1 span { color: #086bff; }
+.login-brand p { margin: 8px 0 0; color: var(--muted); font-size: 18px; }
+.login-form { display: grid; gap: 22px; }
+.login-form label { font-weight: 800; color: #0b1732; font-size: 14px; }
+.input-icon { margin-top: 9px; display: grid; grid-template-columns: 34px 1fr 28px; align-items: center; min-height: 62px; border: 1px solid #ccd9ed; border-radius: 14px; padding: 0 16px; color: #526079; }
+.input-icon input { border: 0; outline: 0; font-size: 18px; color: var(--text); background: transparent; }
+.input-icon input::placeholder { color: #73819b; }
+.input-icon em { font-style: normal; opacity: .7; }
+.login-row { display: flex; align-items: center; justify-content: space-between; color: #1d2a43; }
+.login-row a { color: #005dff; text-decoration: none; font-weight: 700; }
+.remember { display: inline-flex !important; flex-direction: row !important; gap: 10px; align-items: center; font-weight: 500 !important; }
+.login-btn { height: 64px; border: 0; border-radius: 14px; background: linear-gradient(135deg, #0c53ea, #0985ff); color: #fff; font-weight: 900; font-size: 18px; box-shadow: 0 16px 30px rgba(0, 96, 255, .25); }
+.secure-note, .login-footer { color: #64718a; text-align: center; font-weight: 600; }
+.login-error { min-height: 18px; margin: 0; color: #e02222; text-align: center; font-weight: 700; }
+.login-footer { margin-top: 16px; }
+
+/* APP LAYOUT */
+.app-shell { min-height: 100vh; display: grid; grid-template-columns: 292px 1fr; background: linear-gradient(135deg, #eef5ff, #fbfdff); }
+.sidebar { position: sticky; top: 0; height: 100vh; overflow: hidden; padding: 25px 20px; color: #fff; background: radial-gradient(circle at 20% 60%, rgba(0,125,255,.24), transparent 28%), linear-gradient(180deg, #06142f, #071933 55%, #06122a); }
+.sidebar > * { position: relative; z-index: 1; }
+.brand { display: flex; gap: 14px; align-items: center; margin-bottom: 36px; }
+.brand-mark { width: 55px; height: 55px; border-radius: 14px; display: grid; place-items: center; font-size: 30px; font-weight: 900; background: linear-gradient(135deg, #0f78ff, #02a8aa); box-shadow: 0 15px 28px rgba(0, 117, 255, .24); }
+.brand h1 { margin: 0; font-size: 27px; line-height: 1; letter-spacing: -.03em; }
+.brand p { margin: 7px 0 0; color: #bfcae0; font-size: 13px; }
+.side-nav { display: grid; gap: 12px; }
+.nav-btn { width: 100%; min-height: 54px; display: flex; align-items: center; gap: 16px; border: 0; border-radius: 12px; padding: 0 18px; color: #fff; background: transparent; font-size: 16px; font-weight: 800; text-align: left; transition: .2s ease; }
+.nav-btn span { font-size: 25px; opacity: .95; }
+.nav-btn:hover { background: rgba(255,255,255,.08); transform: translateX(2px); }
+.nav-btn.active { background: linear-gradient(135deg, #0b56d9, #0d73ff); box-shadow: 0 14px 32px rgba(0, 91, 255, .30); }
+.sidebar-note { position: absolute; left: 20px; right: 20px; bottom: 140px; padding: 20px 18px; border-radius: 16px; border: 1px solid rgba(84, 159, 255, .30); background: rgba(8, 37, 82, .70); box-shadow: inset 0 1px 0 rgba(255,255,255,.06); }
+.sidebar-note strong { display: block; margin-bottom: 8px; font-size: 17px; }
+.sidebar-note span { display: block; line-height: 1.55; font-size: 13px; color: #d5e2f8; }
+.note-icon { font-size: 24px; margin-bottom: 4px; }
+.side-outline { width: 100%; margin-top: 14px; height: 38px; border-radius: 9px; border: 1px solid #0b73ff; background: transparent; color: #56a3ff; font-weight: 800; }
+.mini-printer { margin: 16px auto 8px; width: 150px; height: 65px; position: relative; }
+.mini-printer i { position: absolute; left: 0; bottom: 6px; width: 68px; height: 40px; border-radius: 8px; background: linear-gradient(#182b4e, #0b1b37); box-shadow: 0 12px 22px rgba(0,0,0,.24); }
+.mini-printer b { position: absolute; right: 0; bottom: 0; width: 74px; height: 62px; border-radius: 8px; padding: 7px; background: #fff; color: #0c1a35; font-size: 9px; transform: rotate(-4deg); }
+.mini-printer em { position: absolute; right: 6px; bottom: 10px; color: #0b73ff; border: 2px solid #0b73ff; font-size: 11px; font-weight: 900; font-style: normal; transform: rotate(-6deg); }
+.sidebar-logout { position: absolute; left: 20px; right: 20px; bottom: 38px; height: 58px; border: 0; border-radius: 12px; color: #fff; background: linear-gradient(135deg, #ff3838, #ff2b2b); font-weight: 900; font-size: 17px; box-shadow: 0 16px 34px rgba(255, 48, 48, .26); }
+.main { padding: 28px 30px 18px; overflow: hidden auto; }
+.tab-section { display: none; }
+.tab-section.active { display: block; }
+.page-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 28px; margin: 0 0 22px; }
+.page-top h2 { margin: 0; font-size: 33px; letter-spacing: -.045em; line-height: 1.08; }
+.page-top p { margin: 10px 0 0; color: var(--muted); font-size: 16px; }
+.top-tools { display: flex; align-items: center; justify-content: flex-end; gap: 14px; flex-wrap: wrap; }
+.search-box { height: 44px; min-width: 360px; display: flex; align-items: center; gap: 10px; padding: 0 16px; background: #fff; border: 1px solid #d9e3f2; border-radius: 11px; box-shadow: var(--shadow-soft); color: #62708b; }
+.search-box input { width: 100%; border: 0; outline: 0; background: transparent; color: var(--text); }
+.profile-chip { display: flex; align-items: center; gap: 10px; color: #071633; font-weight: 800; line-height: 1.08; }
+.profile-chip span { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: #086bff; color: #fff; font-weight: 900; }
+.primary-action, .outline-action, .green-action, .danger-outline, .micro-btn { border-radius: 10px; min-height: 44px; padding: 0 18px; font-weight: 900; border: 1px solid transparent; }
+.primary-action { background: linear-gradient(135deg, #0b56e7, #087cff); color: #fff; box-shadow: 0 12px 24px rgba(0, 101, 255, .20); }
+.outline-action { background: #fff; color: #086bff; border-color: #a9caff; }
+.green-action { background: linear-gradient(135deg, #13a64b, #0f8d40); color: #fff; }
+.danger-outline { background: #fff; color: #ff3030; border-color: #ff8c8c; }
+.micro-btn { min-height: 32px; padding: 0 12px; background: #f5f9ff; color: #086bff; border-color: #d7e7ff; font-size: 12px; }
+.full-btn { width: 100%; margin-top: 16px; height: 50px; }
+.stats-grid { display: grid; grid-template-columns: repeat(4, minmax(190px, 1fr)); gap: 18px; margin-bottom: 18px; }
+.stat-card { position: relative; min-height: 108px; display: grid; grid-template-columns: 64px 1fr; column-gap: 18px; align-items: center; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+.stat-card span { color: #50607a; font-size: 13px; font-weight: 700; }
+.stat-card strong { display: block; margin: 4px 0; font-size: 24px; font-weight: 900; letter-spacing: -.02em; }
+.stat-card small { display: block; color: #5d6d86; font-weight: 600; }
+.stat-icon { width: 58px; height: 58px; border-radius: 16px; display: grid; place-items: center; font-size: 30px; font-weight: 900; grid-row: span 3; }
+.stat-icon.blue { background: #ebf3ff; color: #086bff; } .stat-icon.green { background: #e8f8ee; color: #11964b; } .stat-icon.orange { background: #fff2df; color: #ff8a00; } .stat-icon.purple { background: #f1edff; color: #7357ff; } .stat-icon.red { background: #ffe9e9; color: #ff3030; }
+.green-text { color: #11964b !important; } .orange-text { color: #ff8a00 !important; } .danger-text { color: #ff3030 !important; }
+.card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 18px; }
+.card-title { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.card-title h3 { margin: 0; font-size: 18px; line-height: 1.15; }
+.card-title span:not(.stat-icon) { color: #086bff; font-size: 24px; }
+.card-title small { color: var(--muted); display: block; margin-top: 4px; }
+.card-title.with-action { justify-content: space-between; }
+.card-title.with-action > div { display: flex; align-items: center; gap: 12px; }
+.form-grid { display: grid; gap: 14px; }
+.form-grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.form-grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.form-grid.compact { gap: 12px; }
+.full { grid-column: 1 / -1; }
+label { display: flex; flex-direction: column; gap: 7px; color: #253650; font-size: 12px; font-weight: 800; }
+label b { color: #ff3030; }
+input, select, textarea { width: 100%; border: 1px solid #d7e1f0; border-radius: 9px; background: #fff; color: #071633; padding: 11px 12px; outline: 0; font-size: 13px; font-weight: 600; }
+input:focus, select:focus, textarea:focus { border-color: #0b73ff; box-shadow: 0 0 0 4px rgba(0, 111, 255, .10); }
+.billing-grid { display: grid; grid-template-columns: 1fr 1.12fr 300px; gap: 16px; align-items: start; }
+.customer-card { grid-column: 1; }
+.invoice-meta-card { grid-column: 1; }
+.add-items-card { grid-column: 2; grid-row: 1 / span 2; }
+.summary-card-ui { grid-column: 3; grid-row: 1 / span 2; }
+.payment-card { grid-column: 1; }
+.live-stock-card { grid-column: 2 / span 2; }
+.item-entry { display: grid; grid-template-columns: 1.25fr .85fr .55fr .55fr .45fr .55fr .48fr auto; gap: 10px; align-items: end; }
+.add-btn { height: 39px; min-height: 39px; padding: 0 14px; }
+.table-wrap { overflow: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 760px; }
+th, td { padding: 11px 10px; border-bottom: 1px solid #e8eef7; text-align: left; vertical-align: middle; font-size: 13px; }
+th { color: #455b7d; background: #fbfdff; text-transform: uppercase; font-size: 11px; font-weight: 900; letter-spacing: .02em; }
+td { color: #13223c; font-weight: 600; }
+.num, .right { text-align: right; }
+.empty { text-align: center; color: var(--muted); padding: 22px; }
+.compact-table table { min-width: 900px; }
+.summary-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 10px 0; color: #465773; border-bottom: 1px solid #edf2f8; font-size: 14px; }
+.summary-row strong { color: var(--text); font-weight: 900; }
+.summary-row.grand { margin-top: 8px; color: #086bff; font-weight: 900; font-size: 16px; }
+.summary-row.grand strong { color: #086bff; font-size: 20px; }
+.summary-row.paid strong { color: #11964b; }
+.summary-row.balance strong { color: #ff3030; }
+.history-mini-card { margin-top: 16px; }
+.badge, .status-badge { display: inline-flex; align-items: center; justify-content: center; min-width: 70px; padding: 6px 10px; border-radius: 8px; font-size: 12px; font-weight: 900; }
+.badge, .status-badge.active, .status-paid { background: #e7f8ec; color: #11964b; }
+.badge.low, .status-partial { background: #fff0dc; color: #f47b00; }
+.badge.out, .status-unpaid { background: #ffe9e9; color: #ff3030; }
+.status-badge.cancelled, .status-cancelled { background: #eef1f6; color: #445069; }
+.row-actions { display: flex; gap: 7px; align-items: center; flex-wrap: wrap; }
+.icon-btn { height: 32px; padding: 0 11px; border-radius: 7px; border: 1px solid #a9caff; background: #fff; color: #086bff; font-weight: 900; }
+.icon-btn.delete { border-color: #ff9c9c; color: #ff3030; }
+.product-cell { display: flex; align-items: center; gap: 12px; min-width: 250px; }
+.product-thumb { width: 38px; height: 38px; border-radius: 7px; display: grid; place-items: center; color: #fff; font-weight: 900; background: linear-gradient(135deg, #086bff, #08b6b9); font-size: 11px; box-shadow: 0 4px 10px rgba(0,111,255,.18); }
+.product-cell small { color: #64718a; display: block; font-weight: 600; }
+.stock-form-card { margin-bottom: 16px; }
+.table-tools { display: flex; align-items: center; gap: 12px; }
+.small-search { min-width: 260px; height: 38px; box-shadow: none; }
+.table-footer { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding-top: 14px; color: #4f607c; font-size: 13px; font-weight: 600; }
+.pagination { display: flex; gap: 8px; align-items: center; }
+.pagination button { width: 36px; height: 36px; border: 1px solid #d8e3f2; background: #fff; border-radius: 8px; color: #1c3154; font-weight: 800; }
+.pagination button.active { background: #086bff; color: #fff; border-color: #086bff; }
+.date-pill { height: 44px; display: flex; align-items: center; padding: 0 16px; border: 1px solid #d9e3f2; border-radius: 11px; background: #fff; box-shadow: var(--shadow-soft); font-weight: 800; color: #0e1e3a; }
+.settings-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.form-actions { display: flex; gap: 12px; margin-top: 18px; }
+.print-grid { display: grid; grid-template-columns: 1.35fr 1.05fr .92fr; gap: 16px; align-items: stretch; }
+.print-preview-card { min-height: 505px; }
+.a4-mini-preview, .thermal-mini-preview { height: 350px; display: grid; place-items: center; border: 1px solid #e2ebf6; border-radius: 13px; background: #fff; overflow: hidden; margin-bottom: 14px; }
+.a4-mini-preview img { width: 94%; height: 95%; object-fit: contain; }
+.thermal-mini-preview img { height: 95%; width: auto; object-fit: contain; }
+.split-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.quick-tools-card { grid-column: 3; grid-row: 1; }
+.tool-list { display: grid; gap: 14px; }
+.tool-list div { min-height: 78px; border: 1px solid #e1eaf6; border-radius: 14px; padding: 15px 16px; display: grid; gap: 5px; }
+.tool-list b { color: #0f2346; font-size: 16px; }
+.tool-list span { color: #64718a; }
+.printer-setup-card { grid-column: 1; }
+.print-issues-card { grid-column: 2 / span 2; }
+.setup-list p, .issues-list p { display: grid; grid-template-columns: 190px 1fr auto; align-items: center; gap: 14px; margin: 0; padding: 13px 12px; border-bottom: 1px solid #e8eef7; }
+.setup-list p { grid-template-columns: 150px 1fr; }
+.setup-list b, .issues-list b { color: #0f2346; }
+.setup-list span, .issues-list span { color: #64718a; }
+.setup-list em { display: block; margin-top: 12px; background: #eef6ff; color: #086bff; border-radius: 9px; padding: 12px; font-style: normal; font-weight: 700; }
+.issues-list button { height: 32px; border: 1px solid #a9caff; color: #086bff; background: #fff; border-radius: 7px; font-weight: 800; }
+.app-footer { margin: 22px auto 0; color: #50607a; text-align: center; font-weight: 700; }
+
+/* PRINT AREAS */
+.print-area { display: none; }
+
+.invoice-a4 {
+  width: 190mm;
+  height: 277mm;
+  padding: 5mm 6mm 4mm;
+  margin: 0 auto;
+  background: #fff;
+  color: #111827;
+  font-family: Arial, Helvetica, sans-serif;
+  overflow: hidden;
+  border: 0;
+  box-sizing: border-box;
+}
+.a4-brand-grid { display: grid; grid-template-columns: 22mm 1fr 62mm; gap: 5mm; align-items: start; }
+.a4-sv { width: 21mm; height: 21mm; border-radius: 50%; display: grid; place-items: center; color: #004d9e; font-size: 22mm; font-weight: 900; line-height: 1; position: relative; }
+.a4-sv::after { content: ""; position: absolute; right: -2mm; top: -1mm; width: 7mm; height: 5mm; border-radius: 60% 0 60% 0; background: #188b2b; transform: rotate(-25deg); }
+.a4-company h1 { margin: 0 0 2mm; font-size: 17pt; line-height: 1; color: #06438f; }
+.a4-company .tag { color: #118523; font-weight: 800; font-size: 10.5pt; margin-bottom: 2mm; }
+.a4-company p { margin: 1.2mm 0; font-size: 8pt; line-height: 1.25; }
+.a4-title-box { border-left: 1px solid #0d4f9f; padding-left: 6mm; }
+.a4-title-box h2 { margin: 0 0 3mm; color: #06438f; font-size: 18pt; text-align: center; line-height: 1; }
+.a4-title-stars { color: #14902e; text-align: center; font-size: 9pt; margin-bottom: 3mm; }
+.a4-meta-row { display: grid; grid-template-columns: 28mm 1fr; gap: 2mm; font-size: 8.5pt; margin: 1.6mm 0; }
+.a4-info-strip { margin: 4mm 0 3mm; border: 1px solid #3e78b8; border-radius: 2mm; display: grid; grid-template-columns: repeat(4,1fr); }
+.a4-info-strip div { padding: 2.1mm 4mm; border-right: 1px solid #7ca3d0; font-size: 8pt; display: flex; gap: 3mm; align-items: center; }
+.a4-info-strip div:last-child { border-right: 0; }
+.a4-info-strip b { color: #06438f; display: block; font-size: 9pt; }
+.a4-boxes { display: grid; grid-template-columns: 1fr 1.1fr; gap: 4mm; margin-bottom: 3mm; }
+.a4-panel { border: 1px solid #7ca3d0; border-radius: 2mm; overflow: hidden; min-height: 34mm; }
+.a4-panel h3 { margin: 0; width: max-content; min-width: 38mm; padding: 1.7mm 4mm; color: #fff; background: #06438f; font-size: 9.3pt; border-radius: 0 0 1.5mm 0; }
+.a4-panel.transport h3 { background: #148728; }
+.a4-panel-content { padding: 3mm 4mm; font-size: 8.5pt; line-height: 1.45; }
+.a4-kv { display: grid; grid-template-columns: 34mm 1fr; gap: 2mm; margin: 1mm 0; }
+.a4-items { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 7.3pt; margin-top: 2mm; }
+.a4-items th { background: #06438f; color: #fff; padding: 2mm 1mm; border: 1px solid #477db7; text-align: center; line-height: 1.1; }
+.a4-items td { border: 1px solid #c8d7e9; padding: 1.5mm 1mm; text-align: center; vertical-align: middle; height: 9.5mm; }
+.a4-items .desc { text-align: left; display: flex; gap: 2mm; align-items: center; }
+.a4-prod-img { width: 9mm; height: 9mm; border-radius: 1mm; display: grid; place-items: center; color: #fff; font-size: 5pt; font-weight: 900; background: linear-gradient(135deg, #0b67cc, #1a9d36); flex: 0 0 auto; }
+.a4-under-grid { display: grid; grid-template-columns: 1fr 89mm; gap: 6mm; align-items: start; }
+.a4-note-card { margin: 5mm 10mm 5mm 10mm; border: 1px solid #9ab6d8; border-radius: 2mm; padding: 3mm 4mm; display: flex; gap: 4mm; align-items: center; font-size: 8pt; }
+.a4-note-card .percent { width: 13mm; height: 13mm; border-radius: 50%; border: 2px solid #16982d; color: #16982d; display: grid; place-items: center; font-size: 14pt; font-weight: 800; }
+.a4-words { border: 1px solid #9ab6d8; border-radius: 2mm; padding: 3mm 4mm; font-size: 8.5pt; }
+.a4-words b { color: #06438f; display: block; margin-bottom: 1mm; }
+.a4-totals { border: 1px solid #c8d7e9; border-radius: 2mm; overflow: hidden; font-size: 8.8pt; margin-top: .5mm; }
+.a4-total-line { display: grid; grid-template-columns: 1fr 32mm; gap: 2mm; padding: .95mm 4mm; align-items: center; }
+.a4-total-line strong:last-child, .a4-total-line span:last-child { text-align: right; }
+.a4-total-line.highlight { background: #e9f3ff; color: #06438f; font-weight: 800; }
+.a4-total-line.grand { background: #06438f; color: #fff; font-size: 12pt; font-weight: 900; padding: 1.5mm 4mm; }
+.a4-total-line.paid { color: #0a8b21; font-weight: 900; font-size: 10.2pt; }
+.a4-total-line.balance { color: #e00000; font-weight: 900; font-size: 10.2pt; }
+.a4-bottom-grid { display: grid; grid-template-columns: 1.1fr .75fr 1.34fr; gap: 3mm; margin-top: 4mm; }
+.a4-bottom-panel { border: 1px solid #9ab6d8; border-radius: 2mm; overflow: hidden; min-height: 39mm; font-size: 7.6pt; }
+.a4-bottom-panel h3 { margin: 0; padding: 1.4mm 4mm; color: #fff; background: #148728; font-size: 8.8pt; width: max-content; border-radius: 0 0 1.5mm 0; }
+.a4-bottom-inner { padding: 2.5mm 3.5mm; }
+.a4-qr { width: 25mm; height: 25mm; margin: 1mm auto; border: 1px solid #000; display: grid; place-items: center; font-weight: 900; font-size: 7pt; overflow: hidden; }
+.a4-qr img { width: 100%; height: 100%; object-fit: cover; }
+.a4-sign { border-top: 1px solid #9ab6d8; text-align: center; padding: 2mm; font-size: 7.6pt; }
+.a4-sign .signature { margin: 3mm auto 1mm; width: 40mm; height: 8mm; color: #06438f; font-family: cursive; font-size: 18pt; border-bottom: 1px solid #555; }
+.a4-footer-band { display: grid; grid-template-columns: repeat(3,1fr); align-items: center; margin-top: 2.5mm; background: #06438f; color: #fff; border-radius: 2mm; height: 8mm; font-size: 9pt; overflow: hidden; }
+.a4-footer-band span { text-align: center; }
+.a4-computer-note { text-align: center; font-size: 8pt; margin-top: 1.5mm; }
+
+.thermal-bill { width: 72mm; margin: 0 auto; background: #fff; color: #000; padding: 4mm 4mm 5mm; font-family: Arial, Helvetica, sans-serif; font-size: 10pt; line-height: 1.25; }
+.thermal-edge { height: 4mm; background: repeating-linear-gradient(135deg, transparent 0 3mm, #ddd 3mm 4mm); margin: -4mm -4mm 4mm; }
+.thermal-head { text-align: center; }
+.thermal-logo-row { display: grid; grid-template-columns: 19mm 1fr; gap: 2mm; align-items: center; margin-bottom: 1mm; }
+.thermal-sv { font-size: 30pt; font-weight: 900; line-height: .85; }
+.thermal-head h1 { margin: 0; font-size: 22pt; line-height: .95; }
+.thermal-head .sub { margin: 1.5mm 0 2mm; font-size: 12pt; }
+.thermal-line { border-top: 1px dashed #000; margin: 2mm 0; }
+.thermal-banner { display: inline-block; background: #000; color: #fff; font-size: 12pt; font-weight: 900; padding: 1mm 5mm; margin: 1mm auto; }
+.thermal-row { display: grid; grid-template-columns: 1fr auto; gap: 4mm; align-items: center; margin: 1mm 0; }
+.thermal-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 2mm 5mm; margin-top: 1mm; }
+.thermal-customer { display: grid; grid-template-columns: 10mm 1fr; gap: 1mm; }
+.thermal-items { width: 100%; border-collapse: collapse; font-size: 9.3pt; }
+.thermal-items th { background: #000; color: #fff; padding: 1.2mm .8mm; text-align: right; }
+.thermal-items th:first-child, .thermal-items td:first-child { text-align: left; }
+.thermal-items td { padding: 1.25mm .8mm; border-bottom: 1px dashed #999; text-align: right; }
+.thermal-total-lines { border-top: 1px solid #000; border-bottom: 1px solid #000; padding: 1mm 0; margin: 1.5mm 0; }
+.thermal-grand { font-size: 17pt; font-weight: 900; }
+.thermal-pay-policy { display: grid; grid-template-columns: 29mm 1px 1fr; gap: 4mm; border-top: 1px solid #000; padding-top: 2mm; }
+.thermal-pay-policy .divider { border-left: 1px dashed #000; }
+.thermal-qr { width: 26mm; height: 26mm; margin: 1mm auto; border: 1px solid #000; display: grid; place-items: center; overflow: hidden; font-weight: 900; font-size: 7pt; }
+.thermal-qr img { width: 100%; height: 100%; object-fit: cover; }
+.thermal-thanks { text-align: center; font-family: Georgia, serif; font-style: italic; font-size: 14pt; margin: 3mm 0 2mm; }
+.thermal-black-bar { background: #000; color: #fff; font-weight: 900; text-align: center; padding: 1mm; }
+.thermal-note { text-align: center; margin-top: 2mm; }
+
+@media (max-width: 1200px) {
+  .app-shell { grid-template-columns: 250px 1fr; }
+  .billing-grid { grid-template-columns: 1fr; }
+  .customer-card, .invoice-meta-card, .add-items-card, .summary-card-ui, .payment-card, .live-stock-card { grid-column: auto; grid-row: auto; }
+  .stats-grid, .form-grid.four { grid-template-columns: repeat(2, 1fr); }
+  .print-grid, .settings-layout { grid-template-columns: 1fr; }
+  .quick-tools-card, .printer-setup-card, .print-issues-card { grid-column: auto; }
+}
+
+@media print {
+  @page { margin: 0; }
+  body.print-thermal { width: 80mm !important; }
+  body.print-a4 .app-shell, body.print-a4 .login-screen, body.print-thermal .app-shell, body.print-thermal .login-screen { display: none !important; }
+  body.print-a4 { background: #fff !important; width: 210mm; height: 297mm; overflow: hidden; }
+  body.print-a4 #a4Invoice { display: block !important; width: 210mm; height: 297mm; overflow: hidden; background: #fff; }
+  body.print-a4 #thermalInvoice { display: none !important; }
+  body.print-thermal { background: #fff !important; margin: 0; padding: 0; }
+  body.print-thermal #thermalInvoice { display: block !important; width: 80mm; margin: 0; background: #fff; }
+  body.print-thermal #a4Invoice { display: none !important; }
+  .invoice-a4 { box-shadow: none !important; }
+}
+
+/* =====================================================
+   GST BillPro Premium UI V2.1 interactions
+===================================================== */
+.profile-chip {
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+}
+.profile-chip:hover {
+  border-color: rgba(8, 107, 255, 0.35);
+  box-shadow: 0 12px 28px rgba(8, 107, 255, 0.12);
+}
+.profile-menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  width: 220px;
+  background: #ffffff;
+  border: 1px solid #dbe8f8;
+  box-shadow: 0 22px 55px rgba(10, 28, 56, 0.18);
+  border-radius: 16px;
+  padding: 12px;
+  z-index: 80;
+  display: none;
+  color: #071b45;
+  text-align: left;
+}
+.profile-chip.open .profile-menu { display: block; }
+.profile-menu strong { display: block; font-size: 13px; color: #071b45; }
+.profile-menu small { display: block; margin: 2px 0 10px; color: #64718a; }
+.profile-menu button {
+  width: 100%;
+  height: 38px;
+  border: 0;
+  background: #f6f9ff;
+  color: #0b4ed8;
+  font-weight: 850;
+  border-radius: 10px;
+  margin-top: 6px;
+  text-align: left;
+  padding: 0 12px;
+  cursor: pointer;
+}
+.profile-menu button:hover { background: #eaf3ff; }
+.profile-menu button:last-child { background: #fff1f1; color: #ef4444; }
+
+.premium-toast {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  background: #071b45;
+  color: #fff;
+  border-radius: 14px;
+  padding: 13px 18px;
+  box-shadow: 0 18px 45px rgba(7, 27, 69, 0.24);
+  font-weight: 850;
+  font-size: 14px;
+  z-index: 9999;
+  transform: translateY(24px);
+  opacity: 0;
+  pointer-events: none;
+  transition: .22s ease;
+}
+.premium-toast.show { transform: translateY(0); opacity: 1; }
+
+.search-hit input,
+.search-hit textarea,
+.search-hit select {
+  border-color: #086bff !important;
+  box-shadow: 0 0 0 4px rgba(8, 107, 255, .12) !important;
+}
+
+.clickable-card { cursor: pointer; }
+.clickable-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 45px rgba(10, 28, 56, .13) !important;
+}
+
+.invoice-more-menu {
+  position: fixed;
+  width: 170px;
+  padding: 8px;
+  background: #fff;
+  border: 1px solid #dbe8f8;
+  box-shadow: 0 18px 45px rgba(10, 28, 56, .18);
+  border-radius: 14px;
+  z-index: 1000;
+}
+.invoice-more-menu button {
+  width: 100%;
+  height: 36px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: #0b2658;
+  font-weight: 800;
+  text-align: left;
+  padding: 0 10px;
+  cursor: pointer;
+}
+.invoice-more-menu button:hover { background: #f1f7ff; color: #086bff; }
+.invoice-more-menu button:last-child:hover { background: #fff1f1; color: #ef4444; }
+
+.tool-list > div { cursor: pointer; transition: .18s ease; }
+.tool-list > div:hover {
+  transform: translateX(3px);
+  border-color: #a9caff;
+  background: #f8fbff;
+}
+.issues-list button { cursor: pointer; }
+
+.print-preview-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  background: rgba(7, 18, 45, .72);
+  backdrop-filter: blur(6px);
+  z-index: 5000;
+  padding: 24px;
+  overflow: auto;
+}
+.print-preview-modal.show { display: block; }
+.preview-toolbar {
+  position: sticky;
+  top: 0;
+  max-width: 1100px;
+  margin: 0 auto 16px;
+  background: #ffffff;
+  border: 1px solid #dbe8f8;
+  border-radius: 16px;
+  box-shadow: 0 18px 45px rgba(10, 28, 56, .18);
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 5;
+}
+.preview-toolbar strong { color: #071b45; font-size: 16px; }
+.preview-toolbar button {
+  height: 38px;
+  padding: 0 16px;
+  border-radius: 10px;
+  border: 1px solid #bcd5ff;
+  background: #fff;
+  color: #086bff;
+  font-weight: 850;
+  cursor: pointer;
+}
+.preview-toolbar button:first-child {
+  background: linear-gradient(135deg, #086bff, #0b4ed8);
+  color: #fff;
+  border: 0;
+}
+.preview-stage {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 18px;
+}
+.preview-stage .invoice-a4 {
+  transform-origin: top center;
+  box-shadow: 0 24px 80px rgba(0,0,0,.28);
+}
+.preview-stage.thermal-stage .thermal-bill {
+  box-shadow: 0 24px 80px rgba(0,0,0,.28);
+}
+
+@media screen and (max-width: 1300px) {
+  .preview-stage .invoice-a4 { transform: scale(.75); }
+  .preview-stage { min-height: 900px; }
+}
+
+@media print {
+  .print-preview-modal,
+  .premium-toast,
+  .profile-menu,
+  .invoice-more-menu {
+    display: none !important;
+  }
+  body.print-a4 {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  body.print-a4 #a4Invoice,
+  body.print-a4 .invoice-a4 {
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+}
+
+/* =====================================================
+   GST BillPro V2.2 - A4 Template from uploaded PDF
+   Traditional Indian GST invoice layout
+===================================================== */
+.invoice-a4.a4-gft-template {
+  width: 190mm !important;
+  height: 277mm !important;
+  padding: 0 !important;
+  margin: 0 auto !important;
+  background: #fff !important;
+  color: #000 !important;
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 7.7pt !important;
+  line-height: 1.18 !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+  border: 0 !important;
+}
+
+.a4-gft-template * {
+  box-sizing: border-box;
+  accent-color: exact;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.a4-gft-header {
+  display: grid;
+  grid-template-columns: 1fr 40mm 34mm;
+  column-gap: 4mm;
+  align-items: start;
+  padding: 4.2mm 3.8mm 1.5mm;
+  border-bottom: 1.2px solid #000;
+}
+
+.a4-gft-brand h1 {
+  margin: 0;
+  color: #20224f !important;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 20.8pt;
+  line-height: .95;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .2px;
+}
+
+.a4-gft-tagline {
+  margin-top: 1.8mm;
+  padding: 1.5mm 4mm;
+  background: #0aa37e !important;
+  color: #fff !important;
+  font-size: 10.5pt;
+  font-weight: 900;
+  width: 130mm;
+  white-space: nowrap;
+}
+
+.a4-gft-address {
+  margin-top: 2mm;
+  max-width: 96mm;
+  font-size: 8.7pt;
+  line-height: 1.22;
+}
+
+.a4-gft-contact {
+  margin-top: 22mm;
+  font-size: 8.8pt;
+  line-height: 1.3;
+  text-align: left;
+}
+
+.a4-gft-logo-box {
+  text-align: center;
+  padding-top: 1mm;
+}
+
+.a4-gft-logo-box strong {
+  display: block;
+  margin-top: 2mm;
+  font-size: 13pt;
+  color: #20224f !important;
+  letter-spacing: .5px;
+}
+
+.a4-gft-logo-box small {
+  display: block;
+  margin-top: .5mm;
+  color: #9b9b9b !important;
+  font-size: 6.5pt;
+  letter-spacing: 2px;
+}
+
+.a4-gft-cube {
+  display: grid;
+  gap: 1.8mm;
+  justify-content: center;
+  margin-top: 1mm;
+}
+
+.a4-gft-cube span {
+  width: 21mm;
+  height: 5.4mm;
+  display: block;
+  border: 2.6mm solid #20224f;
+  border-left-color: #0aa37e;
+  border-top-color: #0aa37e;
+  transform: skewY(-28deg);
+}
+
+.a4-gft-title-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 40mm;
+  align-items: center;
+  min-height: 8mm;
+  border-bottom: 1.2px solid #000;
+  font-size: 10pt;
+}
+
+.a4-gft-title-row > div {
+  padding: 1.5mm 2mm;
+}
+
+.a4-gft-title-row > div:nth-child(2) {
+  text-align: center;
+  font-size: 15.5pt;
+  font-weight: 900;
+}
+
+.a4-gft-title-row > div:nth-child(3) {
+  text-align: right;
+  font-size: 7pt;
+  font-weight: 900;
+}
+
+.a4-gft-detail-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1.25fr;
+  min-height: 37mm;
+  border-bottom: 1.2px solid #000;
+}
+
+.a4-gft-detail-left,
+.a4-gft-detail-right {
+  padding: 0 2mm 1.5mm;
+}
+
+.a4-gft-detail-left {
+  border-right: 1.2px solid #000;
+}
+
+.a4-gft-detail-left h3 {
+  margin: 0 0 1.2mm;
+  text-align: center;
+  font-size: 7.2pt;
+  font-weight: 900;
+}
+
+.a4-gft-kv {
+  display: grid;
+  grid-template-columns: 21mm 1fr;
+  gap: 2mm;
+  align-items: start;
+  margin: .8mm 0;
+  min-height: 3.2mm;
+}
+
+.a4-gft-kv b {
+  font-weight: 900;
+}
+
+.a4-gft-kv.address span {
+  line-height: 1.18;
+}
+
+.a4-gft-invoice-pair {
+  display: grid;
+  grid-template-columns: 25mm 1fr 27mm 1fr;
+  gap: 1.5mm;
+  margin: 2.2mm 0;
+  min-height: 4mm;
+}
+
+.a4-gft-invoice-pair b {
+  font-weight: 600;
+}
+
+.a4-gft-items {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 7.4pt;
+}
+
+.a4-gft-items th,
+.a4-gft-items td {
+  border: 1.2px solid #000;
+  padding: 1.4mm 1.2mm;
+  vertical-align: top;
+}
+
+.a4-gft-items th {
+  text-align: center;
+  font-size: 6.6pt;
+  font-weight: 900;
+  line-height: 1.12;
+  background: #fff !important;
+}
+
+.a4-gft-items td {
+  height: 7.2mm;
+  line-height: 1.16;
+}
+
+.a4-gft-items .sr { width: 7.8mm; }
+.a4-gft-items .name { width: 50mm; }
+.a4-gft-items .hsn { width: 19mm; }
+.a4-gft-items .qty { width: 16mm; }
+.a4-gft-items .rate { width: 20mm; }
+.a4-gft-items .taxable { width: 21mm; }
+.a4-gft-items .tax-per { width: 9mm; }
+.a4-gft-items .tax-amount { width: 18mm; }
+.a4-gft-items .total { width: 20mm; }
+.a4-gft-items .center { text-align: center; }
+.a4-gft-items .right { text-align: right; }
+.a4-gft-items .product-name { font-weight: 900; }
+
+.a4-gft-fill-row td {
+  height: 11.5mm !important;
+  border-top: 0;
+  border-bottom: 0;
+}
+
+.a4-gft-table-total td {
+  height: 5.5mm !important;
+  vertical-align: middle;
+  padding: 1mm 1.2mm;
+}
+
+.a4-gft-bottom-grid {
+  display: grid;
+  grid-template-columns: 1.35fr .88fr;
+  border-bottom: 1.2px solid #000;
+}
+
+.a4-gft-left-bottom {
+  border-right: 1.2px solid #000;
+}
+
+.a4-gft-words-block {
+  border-bottom: 1.2px solid #000;
+  min-height: 18mm;
+}
+
+.a4-gft-words-block h3,
+.a4-gft-bank-block h3,
+.a4-gft-terms-block h3 {
+  margin: 0;
+  padding: 1.4mm 2mm;
+  text-align: center;
+  font-size: 7.4pt;
+  font-weight: 900;
+  border-bottom: 1.2px solid #000;
+}
+
+.a4-gft-words-block p {
+  margin: 4.5mm 2mm 0;
+  text-align: center;
+  font-size: 8pt;
+}
+
+.a4-gft-bank-block {
+  border-bottom: 1.2px solid #000;
+  min-height: 44mm;
+}
+
+.a4-gft-bank-grid {
+  display: grid;
+  grid-template-columns: 1fr 29mm;
+  gap: 2mm;
+  padding: 2mm 2mm 1mm;
+}
+
+.a4-gft-kv.bank {
+  grid-template-columns: 28mm 1fr;
+  margin: 1.9mm 0;
+}
+
+.a4-gft-upi-box {
+  text-align: center;
+  font-size: 7pt;
+  align-self: center;
+}
+
+.a4-gft-qr {
+  width: 25mm;
+  height: 25mm;
+  margin: .5mm auto 1mm;
+  border: 1px solid #000;
+  display: grid;
+  place-items: center;
+  font-size: 6.5pt;
+  font-weight: 900;
+  overflow: hidden;
+  line-height: 1.1;
+}
+
+.a4-gft-qr img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.a4-gft-terms-block {
+  min-height: 22mm;
+  border-bottom: 1.2px solid #000;
+}
+
+.a4-gft-terms-block > div {
+  padding: 1.5mm 2mm;
+  line-height: 1.25;
+  font-size: 7.2pt;
+}
+
+.a4-gft-customer-sign {
+  height: 10mm;
+  padding: 2mm;
+  font-size: 8pt;
+}
+
+.a4-gft-right-bottom {
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+.a4-gft-tax-summary {
+  border-bottom: 1.2px solid #000;
+}
+
+.a4-gft-tax-summary > div:not(.eoe) {
+  display: grid;
+  grid-template-columns: 1fr 28mm;
+  border-bottom: 1.2px solid #000;
+  min-height: 7.2mm;
+  align-items: center;
+  padding: 0 2mm;
+}
+
+.a4-gft-tax-summary > div:not(.eoe) b:last-child {
+  text-align: right;
+}
+
+.a4-gft-tax-summary .grand {
+  min-height: 8.2mm !important;
+  font-size: 9.2pt;
+}
+
+.a4-gft-tax-summary .grand b:last-child {
+  font-size: 12pt;
+}
+
+.a4-gft-tax-summary .eoe {
+  text-align: right;
+  padding: 1.2mm 2mm;
+  font-size: 7pt;
+  border-bottom: 1.2px solid #000;
+  font-weight: 900;
+}
+
+.a4-gft-cert-box {
+  position: relative;
+  min-height: 63mm;
+  text-align: center;
+  padding: 3mm 2mm;
+  border-bottom: 1.2px solid #000;
+}
+
+.a4-gft-cert-box p {
+  margin: 0 0 3mm;
+  font-size: 6.6pt;
+  font-weight: 700;
+}
+
+.a4-gft-sign-text {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 8mm;
+  color: #333 !important;
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: 12pt;
+  transform: rotate(-16deg);
+  opacity: .68;
+}
+
+.a4-gft-cert-box > b:last-child {
+  position: absolute;
+  bottom: 1.5mm;
+  left: 0;
+  right: 0;
+  font-size: 6.4pt;
+}
+
+.a4-gft-computer-note {
+  position: absolute;
+  right: 27mm;
+  bottom: 33mm;
+  width: 48mm;
+  transform: rotate(-17deg);
+  text-align: center;
+  font-size: 7.5pt;
+  color: #555 !important;
+  line-height: 1.2;
+}
+
+.a4-gft-thanks {
+  padding: 1.8mm 0 0;
+  font-size: 8pt;
+}
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 10mm;
+  }
+
+  body.print-a4 {
+    width: 210mm !important;
+    height: 297mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    background: #fff !important;
+  }
+
+  body.print-a4 #a4Invoice {
+    display: block !important;
+    width: 190mm !important;
+    height: 277mm !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    background: #fff !important;
+  }
+
+  body.print-a4 .invoice-a4.a4-gft-template {
+    width: 190mm !important;
+    height: 277mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    page-break-after: avoid !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+}
+
+/* =====================================================
+   GST BillPro V2.3 - A4 EXACT PDF TEMPLATE FIX
+   Matches uploaded Gujarat Freight Tools style closer
+   - Bigger full-page print
+   - No compressed look
+   - Strong black invoice borders
+   - Full width table alignment
+===================================================== */
+.invoice-a4.a4-gft-template {
+  width: 200mm !important;
+  height: 285mm !important;
+  padding: 0 !important;
+  margin: 0 auto !important;
+  background: #fff !important;
+  color: #000 !important;
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 8.25pt !important;
+  line-height: 1.16 !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+  border: 0 !important;
+}
+
+.invoice-a4.a4-gft-template * {
+  box-sizing: border-box !important;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+
+.a4-gft-header {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 43mm 30mm !important;
+  column-gap: 3mm !important;
+  align-items: start !important;
+  height: 33mm !important;
+  padding: 3mm 3mm 1.5mm !important;
+  border-bottom: 1.4px solid #000 !important;
+  overflow: hidden !important;
+}
+
+.a4-gft-brand { min-width: 0 !important; }
+.a4-gft-brand h1 {
+  margin: 0 !important;
+  color: #20224f !important;
+  font-family: Georgia, 'Times New Roman', serif !important;
+  font-size: 24pt !important;
+  line-height: .92 !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+  letter-spacing: .1px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: clip !important;
+}
+
+.a4-gft-tagline {
+  margin-top: 1.8mm !important;
+  padding: 1.55mm 4mm !important;
+  background: #009f82 !important;
+  color: #fff !important;
+  font-size: 10.2pt !important;
+  line-height: 1 !important;
+  font-weight: 900 !important;
+  width: 100% !important;
+  max-width: 122mm !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+}
+
+.a4-gft-address {
+  margin-top: 2.2mm !important;
+  max-width: 116mm !important;
+  font-size: 8.6pt !important;
+  line-height: 1.24 !important;
+  overflow: hidden !important;
+}
+
+.a4-gft-contact {
+  margin-top: 20mm !important;
+  font-size: 8.4pt !important;
+  line-height: 1.28 !important;
+  text-align: left !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+}
+
+.a4-gft-logo-box {
+  text-align: center !important;
+  padding-top: .5mm !important;
+  overflow: hidden !important;
+}
+.a4-gft-logo-box strong {
+  display: block !important;
+  margin-top: 1.5mm !important;
+  font-size: 12.2pt !important;
+  color: #20224f !important;
+  letter-spacing: .3px !important;
+  white-space: nowrap !important;
+}
+.a4-gft-logo-box small {
+  display: block !important;
+  margin-top: .3mm !important;
+  color: #9b9b9b !important;
+  font-size: 5.8pt !important;
+  letter-spacing: 1.5px !important;
+  white-space: nowrap !important;
+}
+.a4-gft-cube { display: grid !important; gap: 1.3mm !important; justify-content: center !important; margin-top: .4mm !important; }
+.a4-gft-cube span {
+  width: 18mm !important;
+  height: 4.7mm !important;
+  display: block !important;
+  border: 2.2mm solid #20224f !important;
+  border-left-color: #009f82 !important;
+  border-top-color: #009f82 !important;
+  transform: skewY(-28deg) !important;
+}
+
+.a4-gft-title-row {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 42mm !important;
+  align-items: center !important;
+  height: 8mm !important;
+  min-height: 8mm !important;
+  border-bottom: 1.4px solid #000 !important;
+  font-size: 9.4pt !important;
+}
+.a4-gft-title-row > div { padding: 1.2mm 2mm !important; }
+.a4-gft-title-row > div:nth-child(2) { text-align: center !important; font-size: 15.6pt !important; line-height: 1 !important; font-weight: 900 !important; }
+.a4-gft-title-row > div:nth-child(3) { text-align: right !important; font-size: 6.8pt !important; font-weight: 900 !important; }
+
+.a4-gft-detail-grid {
+  display: grid !important;
+  grid-template-columns: 1.02fr 1.25fr !important;
+  height: 39mm !important;
+  min-height: 39mm !important;
+  border-bottom: 1.4px solid #000 !important;
+  overflow: hidden !important;
+}
+.a4-gft-detail-left,
+.a4-gft-detail-right { padding: 0 2mm 1.3mm !important; overflow: hidden !important; }
+.a4-gft-detail-left { border-right: 1.4px solid #000 !important; }
+.a4-gft-detail-left h3 { margin: 0 0 1.1mm !important; text-align: center !important; font-size: 7.4pt !important; font-weight: 900 !important; }
+.a4-gft-kv { display: grid !important; grid-template-columns: 22mm 1fr !important; gap: 2mm !important; align-items: start !important; margin: .7mm 0 !important; min-height: 3.3mm !important; }
+.a4-gft-kv b { font-weight: 900 !important; }
+.a4-gft-kv.address span { line-height: 1.15 !important; max-height: 11mm !important; overflow: hidden !important; }
+.a4-gft-invoice-pair {
+  display: grid !important;
+  grid-template-columns: 25mm 1fr 28mm 1fr !important;
+  gap: 1.5mm !important;
+  margin: 2.1mm 0 !important;
+  min-height: 4mm !important;
+  align-items: start !important;
+}
+.a4-gft-invoice-pair b { font-weight: 600 !important; }
+
+.a4-gft-items {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  table-layout: fixed !important;
+  font-size: 7.75pt !important;
+}
+.a4-gft-items th,
+.a4-gft-items td {
+  border: 1.4px solid #000 !important;
+  padding: 1.3mm 1mm !important;
+  vertical-align: top !important;
+  overflow: hidden !important;
+}
+.a4-gft-items th {
+  text-align: center !important;
+  font-size: 6.75pt !important;
+  font-weight: 900 !important;
+  line-height: 1.06 !important;
+  background: #fff !important;
+}
+.a4-gft-items td { height: 7.4mm !important; line-height: 1.12 !important; }
+.a4-gft-items .sr { width: 8mm !important; }
+.a4-gft-items .name { width: 54mm !important; }
+.a4-gft-items .hsn { width: 19mm !important; }
+.a4-gft-items .qty { width: 16mm !important; }
+.a4-gft-items .rate { width: 20mm !important; }
+.a4-gft-items .taxable { width: 23mm !important; }
+.a4-gft-items .tax-per { width: 10mm !important; }
+.a4-gft-items .tax-amount { width: 18mm !important; }
+.a4-gft-items .total { width: 22mm !important; }
+.a4-gft-items .center { text-align: center !important; }
+.a4-gft-items .right { text-align: right !important; }
+.a4-gft-items .product-name { font-weight: 900 !important; }
+.a4-gft-fill-row td { height: 13.2mm !important; border-top: 0 !important; border-bottom: 0 !important; }
+.a4-gft-table-total td { height: 5.6mm !important; vertical-align: middle !important; padding: 1mm 1mm !important; }
+
+.a4-gft-bottom-grid {
+  display: grid !important;
+  grid-template-columns: 1.35fr .88fr !important;
+  border-bottom: 1.4px solid #000 !important;
+  min-height: 89mm !important;
+}
+.a4-gft-left-bottom { border-right: 1.4px solid #000 !important; min-width: 0 !important; }
+.a4-gft-words-block { border-bottom: 1.4px solid #000 !important; min-height: 19mm !important; }
+.a4-gft-words-block h3,
+.a4-gft-bank-block h3,
+.a4-gft-terms-block h3 { margin: 0 !important; padding: 1.35mm 2mm !important; text-align: center !important; font-size: 7.6pt !important; font-weight: 900 !important; border-bottom: 1.4px solid #000 !important; }
+.a4-gft-words-block p { margin: 4.8mm 2mm 0 !important; text-align: center !important; font-size: 8pt !important; }
+.a4-gft-bank-block { border-bottom: 1.4px solid #000 !important; min-height: 43mm !important; }
+.a4-gft-bank-grid { display: grid !important; grid-template-columns: 1fr 31mm !important; gap: 2mm !important; padding: 2mm 2mm 1mm !important; }
+.a4-gft-kv.bank { grid-template-columns: 28mm 1fr !important; margin: 1.8mm 0 !important; }
+.a4-gft-upi-box { text-align: center !important; font-size: 7pt !important; align-self: center !important; }
+.a4-gft-qr { width: 27mm !important; height: 27mm !important; margin: .3mm auto 1mm !important; border: 1px solid #000 !important; display: grid !important; place-items: center !important; font-size: 6.5pt !important; font-weight: 900 !important; overflow: hidden !important; }
+.a4-gft-qr img { width: 100% !important; height: 100% !important; object-fit: cover !important; }
+.a4-gft-terms-block { min-height: 20mm !important; border-bottom: 1.4px solid #000 !important; }
+.a4-gft-terms-block > div { padding: 1.4mm 2mm !important; line-height: 1.2 !important; font-size: 7.25pt !important; }
+.a4-gft-customer-sign { height: 9mm !important; padding: 1.8mm 2mm !important; font-size: 8pt !important; }
+.a4-gft-right-bottom { display: grid !important; grid-template-rows: auto 1fr !important; position: relative !important; }
+.a4-gft-tax-summary { border-bottom: 1.4px solid #000 !important; }
+.a4-gft-tax-summary > div:not(.eoe) { display: grid !important; grid-template-columns: 1fr 29mm !important; border-bottom: 1.4px solid #000 !important; min-height: 7.2mm !important; align-items: center !important; padding: 0 2mm !important; }
+.a4-gft-tax-summary > div:not(.eoe) b:last-child { text-align: right !important; }
+.a4-gft-tax-summary .grand { min-height: 8mm !important; font-size: 9.4pt !important; }
+.a4-gft-tax-summary .grand b:last-child { font-size: 12pt !important; }
+.a4-gft-tax-summary .eoe { text-align: right !important; padding: 1mm 2mm !important; font-size: 7pt !important; border-bottom: 1.4px solid #000 !important; font-weight: 900 !important; }
+.a4-gft-cert-box { position: relative !important; min-height: 61mm !important; text-align: center !important; padding: 3mm 2mm !important; border-bottom: 1.4px solid #000 !important; }
+.a4-gft-cert-box p { margin: 0 0 3mm !important; font-size: 6.8pt !important; font-weight: 700 !important; }
+.a4-gft-sign-text { position: absolute !important; left: 0 !important; right: 0 !important; bottom: 8.5mm !important; color: #333 !important; font-family: Georgia, serif !important; font-style: italic !important; font-size: 12pt !important; transform: rotate(-16deg) !important; opacity: .7 !important; }
+.a4-gft-cert-box > b:last-child { position: absolute !important; bottom: 1.4mm !important; left: 0 !important; right: 0 !important; font-size: 6.5pt !important; }
+.a4-gft-computer-note { position: absolute !important; right: 24mm !important; bottom: 26mm !important; width: 48mm !important; transform: rotate(-17deg) !important; text-align: center !important; font-size: 7.5pt !important; color: #555 !important; line-height: 1.2 !important; }
+.a4-gft-thanks { padding: 1.8mm 0 0 !important; font-size: 8.4pt !important; }
+
+@media print {
+  @page { size: A4 portrait; margin: 5mm; }
+  body.print-a4 { width: 210mm !important; height: 297mm !important; margin: 0 !important; padding: 0 !important; overflow: hidden !important; background: #fff !important; }
+  body.print-a4 #a4Invoice { display: block !important; width: 200mm !important; height: 287mm !important; margin: 0 !important; overflow: hidden !important; background: #fff !important; }
+  body.print-a4 .invoice-a4.a4-gft-template { width: 200mm !important; height: 285mm !important; margin: 0 auto !important; padding: 0 !important; box-shadow: none !important; border: none !important; page-break-after: avoid !important; page-break-inside: avoid !important; break-inside: avoid !important; }
+}
+
+/* =====================================================
+   GST BillPro V2.4 - A4 HEADER ADDRESS/CONTACT ALIGNMENT FIX
+   Fixes top-right Tel/Web block and logo alignment to match uploaded template
+===================================================== */
+.invoice-a4.a4-gft-template {
+  width: 200mm !important;
+  height: 285mm !important;
+}
+
+.a4-gft-header {
+  grid-template-columns: 132mm 34mm 25mm !important;
+  column-gap: 2.5mm !important;
+  height: 33mm !important;
+  padding: 3mm 3mm 1.2mm !important;
+  align-items: start !important;
+  overflow: hidden !important;
+}
+
+.a4-gft-brand h1 {
+  font-size: 22pt !important;
+  line-height: .92 !important;
+  max-width: 128mm !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+}
+
+.a4-gft-tagline {
+  margin-top: 1.5mm !important;
+  width: 126mm !important;
+  max-width: 126mm !important;
+  padding: 1.45mm 3.5mm !important;
+  font-size: 9pt !important;
+  line-height: 1.05 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+}
+
+.a4-gft-address {
+  margin-top: 2mm !important;
+  max-width: 82mm !important;
+  font-size: 7.25pt !important;
+  line-height: 1.18 !important;
+  height: 8.8mm !important;
+  overflow: hidden !important;
+}
+
+.a4-gft-contact {
+  margin-top: 17mm !important;
+  padding-left: 0 !important;
+  font-size: 6.6pt !important;
+  line-height: 1.18 !important;
+  text-align: left !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  max-width: 34mm !important;
+}
+
+.a4-gft-contact div {
+  display: block !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: clip !important;
+}
+
+.a4-gft-logo-box {
+  width: 25mm !important;
+  padding-top: 1mm !important;
+  text-align: center !important;
+  overflow: hidden !important;
+}
+
+.a4-gft-cube {
+  transform: scale(.82) !important;
+  transform-origin: top center !important;
+  margin-top: 0 !important;
+  gap: .9mm !important;
+}
+
+.a4-gft-logo-box strong {
+  margin-top: -1mm !important;
+  font-size: 9.3pt !important;
+  line-height: 1 !important;
+}
+
+.a4-gft-logo-box small {
+  font-size: 4.8pt !important;
+  letter-spacing: 1px !important;
+}
+
+@media print {
+  .a4-gft-header {
+    grid-template-columns: 132mm 34mm 25mm !important;
+    column-gap: 2.5mm !important;
+    height: 33mm !important;
+    padding: 3mm 3mm 1.2mm !important;
+  }
+}
+
+/* =====================================================
+   GST BillPro V2.5 - A4 PDF TEMPLATE EXACT ALIGNMENT
+   Based on uploaded bill(2).pdf layout
+   Fixes: right-side clipping, header contact/logo alignment,
+   content width, black border table grid, one-page A4 fit.
+===================================================== */
+.invoice-a4.a4-gft-template {
+  width: 188mm !important;
+  height: 270mm !important;
+  min-height: 270mm !important;
+  max-height: 270mm !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  background: #fff !important;
+  color: #000 !important;
+  overflow: hidden !important;
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 7.15pt !important;
+  line-height: 1.12 !important;
+  box-sizing: border-box !important;
+}
+
+.invoice-a4.a4-gft-template,
+.invoice-a4.a4-gft-template * {
+  box-sizing: border-box !important;
+}
+
+/* Header exactly like PDF: brand left, contact center-right, logo far-right */
+.invoice-a4.a4-gft-template .a4-gft-header {
+  display: block !important;
+  position: relative !important;
+  width: 188mm !important;
+  height: 34mm !important;
+  min-height: 34mm !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-bottom: 1.25px solid #000 !important;
+  overflow: hidden !important;
+}
+
+.invoice-a4.a4-gft-template .a4-gft-brand {
+  display: block !important;
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  min-width: 0 !important;
+  overflow: visible !important;
+}
+
+.invoice-a4.a4-gft-template .a4-gft-brand h1 {
+  position: absolute !important;
+  left: 1mm !important;
+  top: .8mm !important;
+  width: 145mm !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: #262752 !important;
+  font-family: Georgia, 'Times New Roman', serif !important;
+  font-size: 23pt !important;
+  font-weight: 900 !important;
+  letter-spacing: .35px !important;
+  line-height: .92 !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+}
+
+.invoice-a4.a4-gft-template .a4-gft-tagline {
+  position: absolute !important;
+  left: 1mm !important;
+  top: 10mm !important;
+  width: 145mm !important;
+  height: 5.5mm !important;
+  margin: 0 !important;
+  padding: 1.05mm 3mm !important;
+  background: #008f7a !important;
+  color: #fff !important;
+  font-size: 8.3pt !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: clip !important;
+}
+
+.invoice-a4.a4-gft-template .a4-gft-address {
+  position: absolute !important;
+  left: 1.2mm !important;
+  top: 18.2mm !important;
+  width: 94mm !important;
+  height: 12.2mm !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: #000 !important;
+  font-size: 7.35pt !important;
+  line-height: 1.22 !important;
+  white-space: normal !important;
+  overflow: hidden !important;
+}
+
+.invoice-a4.a4-gft-template .a4-gft-contact {
+  position: absolute !important;
+  left: 106mm !important;
+  top: 18.4mm !important;
+  width: 39mm !important;
+  max-width: 39mm !important;
+  height: 11.5mm !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: #000 !important;
+  font-size: 7.1pt !important;
+  line-height: 1.22 !important;
+  text-align: left !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+}
+
+.invoice-a4.a4-gft-template .a4-gft-contact div {
+  display: block !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: clip !important;
+}
+
+.invoice-a4.a4-gft-template .a4-gft-logo-box {
+  position: absolute !important;
+  right: 1mm !important;
+  top: 1mm !important;
+  width: 33mm !important;
+  height: 28mm !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  text-align: center !important;
+}
+
+.invoice-a4.a4-gft-template .a4-gft-cube {
+  display: grid !important;
+  gap: 1.1mm !important;
+  justify-content: center !important;
+  margin: 0 auto .3mm !important;
+  transform: scale(.82) !important;
+  transform-origin: top center !important;
+}
+
+.invoice-a4.a4-gft-template .a4-gft-cube span {
+  width: 18mm !important;
+  height: 4.6mm !important;
+  border-width: 2mm !important;
+}
+
+.invoice-a4.a4-gft-template .a4-gft-logo-box strong {
+  display: block !important;
+  margin: -1.3mm 0 0 !important;
+  color: #2a2352 !important;
+  font-size: 10.2pt !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+.invoice-a4.a4-gft-template .a4-gft-logo-box small {
+  display: block !important;
+  color: #999 !important;
+  font-size: 4.7pt !important;
+  letter-spacing: 1px !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+/* PAN + TAX INVOICE title row */
+.invoice-a4.a4-gft-template .a4-gft-title-row {
+  width: 188mm !important;
+  height: 7mm !important;
+  min-height: 7mm !important;
+  display: grid !important;
+  grid-template-columns: 70mm 65mm 53mm !important;
+  align-items: center !important;
+  border-bottom: 1.25px solid #000 !important;
+  overflow: hidden !important;
+  font-size: 9.2pt !important;
+  line-height: 1 !important;
+}
+
+.invoice-a4.a4-gft-template .a4-gft-title-row > div {
+  padding: 1mm 1.5mm !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+}
+.invoice-a4.a4-gft-template .a4-gft-title-row > div:nth-child(2) {
+  text-align: center !important;
+  font-size: 14.3pt !important;
+  font-weight: 900 !important;
+}
+.invoice-a4.a4-gft-template .a4-gft-title-row > div:nth-child(3) {
+  text-align: right !important;
+  font-size: 6.7pt !important;
+  font-weight: 900 !important;
+}
+
+/* Customer / invoice details */
+.invoice-a4.a4-gft-template .a4-gft-detail-grid {
+  width: 188mm !important;
+  height: 37.5mm !important;
+  min-height: 37.5mm !important;
+  display: grid !important;
+  grid-template-columns: 76mm 112mm !important;
+  border-bottom: 1.25px solid #000 !important;
+  overflow: hidden !important;
+}
+.invoice-a4.a4-gft-template .a4-gft-detail-left,
+.invoice-a4.a4-gft-template .a4-gft-detail-right {
+  padding: 0 1.4mm 1mm !important;
+  overflow: hidden !important;
+}
+.invoice-a4.a4-gft-template .a4-gft-detail-left {
+  border-right: 1.25px solid #000 !important;
+}
+.invoice-a4.a4-gft-template .a4-gft-detail-left h3 {
+  margin: 0 0 .8mm !important;
+  padding: 0 !important;
+  text-align: center !important;
+  font-size: 7.2pt !important;
+  font-weight: 900 !important;
+  line-height: 1.2 !important;
+}
+.invoice-a4.a4-gft-template .a4-gft-kv {
+  display: grid !important;
+  grid-template-columns: 18mm 1fr !important;
+  gap: 2mm !important;
+  margin: .6mm 0 !important;
+  min-height: 3.2mm !important;
+  font-size: 7.2pt !important;
+  line-height: 1.12 !important;
+}
+.invoice-a4.a4-gft-template .a4-gft-kv b {
+  font-weight: 900 !important;
+}
+.invoice-a4.a4-gft-template .a4-gft-kv.address span {
+  max-height: 9.8mm !important;
+  overflow: hidden !important;
+}
+.invoice-a4.a4-gft-template .a4-gft-invoice-pair {
+  display: grid !important;
+  grid-template-columns: 25mm 30mm 26mm 26mm !important;
+  gap: 1mm !important;
+  min-height: 4.3mm !important;
+  margin: 1.6mm 0 !important;
+  align-items: start !important;
+  font-size: 7.2pt !important;
+  line-height: 1.12 !important;
+}
+.invoice-a4.a4-gft-template .a4-gft-invoice-pair b {
+  font-weight: 600 !important;
+}
+
+/* Item table exact full width, no right-side clipping */
+.invoice-a4.a4-gft-template .a4-gft-items {
+  width: 188mm !important;
+  max-width: 188mm !important;
+  border-collapse: collapse !important;
+  table-layout: fixed !important;
+  margin: 4.2mm 0 0 !important;
+  font-size: 7.05pt !important;
+}
+.invoice-a4.a4-gft-template .a4-gft-items th,
+.invoice-a4.a4-gft-template .a4-gft-items td {
+  border: 1.25px solid #000 !important;
+  padding: .95mm .65mm !important;
+  color: #000 !important;
+  background: #fff !important;
+  vertical-align: top !important;
+  overflow: hidden !important;
+  line-height: 1.1 !important;
+}
+.invoice-a4.a4-gft-template .a4-gft-items th {
+  text-align: center !important;
+  font-size: 5.8pt !important;
+  font-weight: 900 !important;
+  line-height: 1.04 !important;
+}
+.invoice-a4.a4-gft-template .a4-gft-items td {
+  height: 6.6mm !important;
+}
+.invoice-a4.a4-gft-template .a4-gft-items .sr { width: 7.4mm !important; }
+.invoice-a4.a4-gft-template .a4-gft-items .name { width: 52.5mm !important; }
+.invoice-a4.a4-gft-template .a4-gft-items .hsn { width: 20.5mm !important; }
+.invoice-a4.a4-gft-template .a4-gft-items .qty { width: 16.5mm !important; }
+.invoice-a4.a4-gft-template .a4-gft-items .rate { width: 20.5mm !important; }
+.invoice-a4.a4-gft-template .a4-gft-items .taxable { width: 21mm !important; }
+.invoice-a4.a4-gft-template .a4-gft-items .tax-per { width: 9.5mm !important; }
+.invoice-a4.a4-gft-template .a4-gft-items .tax-amount { width: 18.8mm !important; }
+.invoice-a4.a4-gft-template .a4-gft-items .total { width: 21.3mm !important; }
+.invoice-a4.a4-gft-template .a4-gft-items .center { text-align: center !important; }
+.invoice-a4.a4-gft-template .a4-gft-items .right { text-align: right !important; }
+.invoice-a4.a4-gft-template .a4-gft-items .product-name { font-weight: 900 !important; }
+.invoice-a4.a4-gft-template .a4-gft-fill-row td {
+  height: 16.7mm !important;
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+}
+.invoice-a4.a4-gft-template .a4-gft-table-total td {
+  height: 5.5mm !important;
+  vertical-align: middle !important;
+  padding: .85mm .65mm !important;
+}
+
+/* Lower grid: exact PDF style left bank/terms, right summary/signature */
+.invoice-a4.a4-gft-template .a4-gft-bottom-grid {
+  width: 188mm !important;
+  display: grid !important;
+  grid-template-columns: 113mm 75mm !important;
+  min-height: 76mm !important;
+  border-bottom: 1.25px solid #000 !important;
+  overflow: hidden !important;
+}
+.invoice-a4.a4-gft-template .a4-gft-left-bottom {
+  border-right: 1.25px solid #000 !important;
+  overflow: hidden !important;
+}
+.invoice-a4.a4-gft-template .a4-gft-words-block {
+  min-height: 17mm !important;
+  border-bottom: 1.25px solid #000 !important;
+}
+.invoice-a4.a4-gft-template .a4-gft-words-block h3,
+.invoice-a4.a4-gft-template .a4-gft-bank-block h3,
+.invoice-a4.a4-gft-template .a4-gft-terms-block h3 {
+  margin: 0 !important;
+  padding: 1.05mm 1.5mm !important;
+  text-align: center !important;
+  font-size: 6.9pt !important;
+  font-weight: 900 !important;
+  line-height: 1.05 !important;
+  border-bottom: 1.25px solid #000 !important;
+}
+.invoice-a4.a4-gft-template .a4-gft-words-block p {
+  margin: 4.2mm 2mm 0 !important;
+  text-align: center !important;
+  font-size: 7.4pt !important;
+  line-height: 1.15 !important;
+}
+.invoice-a4.a4-gft-template .a4-gft-bank-block {
+  min-height: 35mm !important;
+  border-bottom: 1.25px solid #000 !important;
+}
+.invoice-a4.a4-gft-template .a4-gft-bank-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 31mm !important;
+  gap: 2mm !important;
+  padding: 1.5mm 2mm .8mm !important;
+}
+.invoice-a4.a4-gft-template .a4-gft-kv.bank {
+  grid-template-columns: 24mm 1fr !important;
+  margin: 1.45mm 0 !important;
+  min-height: 3.2mm !important;
+  font-size: 7.2pt !important;
+}
+.invoice-a4.a4-gft-template .a4-gft-upi-box {
+  text-align: center !important;
+  font-size: 6.8pt !important;
+  font-weight: 800 !important;
+  align-self: center !important;
+}
+.invoice-a4.a4-gft-template .a4-gft-qr {
+  width: 27mm !important;
+  height: 27mm !important;
+  margin: 0 auto .6mm !important;
+  border: 1px solid #000 !important;
+  display: grid !important;
+  place-items: center !important;
+  font-size: 6pt !important;
+  font-weight: 900 !important;
+  overflow: hidden !important;
+}
+.invoice-a4.a4-gft-template .a4-gft-qr img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+.invoice-a4.a4-gft-template .a4-gft-terms-block {
+  min-height: 20mm !important;
+  border-bottom: 1.25px solid #000 !important;
+}
+.invoice-a4.a4-gft-template .a4-gft-terms-block > div {
+  padding: 1.2mm 1.7mm !important;
+  font-size: 6.9pt !important;
+  line-height: 1.16 !important;
+}
+.invoice-a4.a4-gft-template .a4-gft-customer-sign {
+  height: 7.5mm !important;
+  padding: 1.3mm 1.7mm !important;
+  font-size: 7.3pt !important;
+}
+.invoice-a4.a4-gft-template .a4-gft-right-bottom {
+  display: grid !important;
+  grid-template-rows: auto 1fr !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+.invoice-a4.a4-gft-template .a4-gft-tax-summary {
+  border-bottom: 1.25px solid #000 !important;
+}
+.invoice-a4.a4-gft-template .a4-gft-tax-summary > div:not(.eoe) {
+  display: grid !important;
+  grid-template-columns: 1fr 28mm !important;
+  min-height: 6mm !important;
+  align-items: center !important;
+  border-bottom: 1.25px solid #000 !important;
+  padding: 0 1.7mm !important;
+  font-size: 7.2pt !important;
+}
+.invoice-a4.a4-gft-template .a4-gft-tax-summary > div:not(.eoe) b:last-child { text-align: right !important; }
+.invoice-a4.a4-gft-template .a4-gft-tax-summary .grand {
+  min-height: 7mm !important;
+  font-size: 8.5pt !important;
+}
+.invoice-a4.a4-gft-template .a4-gft-tax-summary .grand b:last-child { font-size: 10.5pt !important; }
+.invoice-a4.a4-gft-template .a4-gft-tax-summary .eoe {
+  height: 5mm !important;
+  padding: 1mm 1.7mm !important;
+  text-align: right !important;
+  font-size: 6.6pt !important;
+  font-weight: 900 !important;
+  border-bottom: 1.25px solid #000 !important;
+}
+.invoice-a4.a4-gft-template .a4-gft-cert-box {
+  position: relative !important;
+  min-height: 41mm !important;
+  text-align: center !important;
+  padding: 2.5mm 1.7mm !important;
+  border-bottom: 1.25px solid #000 !important;
+}
+.invoice-a4.a4-gft-template .a4-gft-cert-box p {
+  margin: 0 0 2.5mm !important;
+  font-size: 6.4pt !important;
+  font-weight: 700 !important;
+  line-height: 1.15 !important;
+}
+.invoice-a4.a4-gft-template .a4-gft-sign-text {
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 8mm !important;
+  color: #333 !important;
+  font-family: Georgia, serif !important;
+  font-size: 10.5pt !important;
+  font-style: italic !important;
+  transform: rotate(-15deg) !important;
+  opacity: .65 !important;
+}
+.invoice-a4.a4-gft-template .a4-gft-cert-box > b:last-child {
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 1.3mm !important;
+  font-size: 6.2pt !important;
+}
+.invoice-a4.a4-gft-template .a4-gft-computer-note {
+  position: absolute !important;
+  right: 21mm !important;
+  bottom: 17mm !important;
+  width: 45mm !important;
+  color: #555 !important;
+  font-size: 7pt !important;
+  line-height: 1.12 !important;
+  text-align: center !important;
+  transform: rotate(-16deg) !important;
+}
+.invoice-a4.a4-gft-template .a4-gft-thanks {
+  width: 188mm !important;
+  padding: 2mm 0 0 !important;
+  font-size: 8pt !important;
+  line-height: 1 !important;
+  color: #000 !important;
+}
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 10mm 11mm !important;
+  }
+  html,
+  body.print-a4 {
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    background: #fff !important;
+  }
+  body.print-a4 #a4Invoice {
+    display: block !important;
+    width: 188mm !important;
+    max-width: 188mm !important;
+    height: 270mm !important;
+    max-height: 270mm !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    background: #fff !important;
+    page-break-after: avoid !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+  body.print-a4 .invoice-a4.a4-gft-template {
+    display: block !important;
+    width: 188mm !important;
+    max-width: 188mm !important;
+    height: 270mm !important;
+    max-height: 270mm !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    transform: none !important;
+    overflow: hidden !important;
+    page-break-after: avoid !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+}
+
+/* =====================================================
+   GST BillPro V2.6 - TRUE A4 PDF TEMPLATE REBUILD
+   This template uses a new isolated class (.a4-exact-template)
+   so old A4 styles cannot disturb alignment.
+===================================================== */
+.invoice-a4.a4-exact-template {
+  width: 190mm !important;
+  height: 267mm !important;
+  max-width: 190mm !important;
+  max-height: 267mm !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  background: #fff !important;
+  color: #000 !important;
+  border: none !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+  position: relative !important;
+  box-sizing: border-box !important;
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 7.65pt !important;
+  line-height: 1.15 !important;
+}
+.invoice-a4.a4-exact-template,
+.invoice-a4.a4-exact-template * {
+  box-sizing: border-box !important;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+  color: #000;
+}
+
+/* Header from uploaded PDF */
+.a4-exact-template .a4x-header {
+  width: 190mm !important;
+  height: 34mm !important;
+  position: relative !important;
+  overflow: hidden !important;
+  border-bottom: 1.2px solid #000 !important;
+  background: #fff !important;
+}
+.a4-exact-template .a4x-company-name {
+  position: absolute !important;
+  left: 1.5mm !important;
+  top: 1.4mm !important;
+  width: 145mm !important;
+  height: 8mm !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  color: #252451 !important;
+  font-family: Georgia, 'Times New Roman', serif !important;
+  font-size: 23.2pt !important;
+  font-weight: 900 !important;
+  line-height: .9 !important;
+  text-transform: uppercase !important;
+  letter-spacing: .15px !important;
+}
+.a4-exact-template .a4x-tagline {
+  position: absolute !important;
+  left: 1.5mm !important;
+  top: 10.8mm !important;
+  width: 146.5mm !important;
+  height: 5.9mm !important;
+  padding: 1.15mm 3.8mm !important;
+  background: #079d83 !important;
+  color: #fff !important;
+  font-size: 9.25pt !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+}
+.a4-exact-template .a4x-address {
+  position: absolute !important;
+  left: 2mm !important;
+  top: 19.1mm !important;
+  width: 91mm !important;
+  height: 12.5mm !important;
+  overflow: hidden !important;
+  font-size: 8.2pt !important;
+  line-height: 1.25 !important;
+}
+.a4-exact-template .a4x-contact {
+  position: absolute !important;
+  left: 109mm !important;
+  top: 19.4mm !important;
+  width: 39mm !important;
+  height: 12mm !important;
+  overflow: hidden !important;
+  font-size: 8.15pt !important;
+  line-height: 1.22 !important;
+  text-align: left !important;
+  white-space: nowrap !important;
+}
+.a4-exact-template .a4x-contact div { white-space: nowrap !important; overflow: hidden !important; }
+.a4-exact-template .a4x-logo {
+  position: absolute !important;
+  right: 2.5mm !important;
+  top: 1.5mm !important;
+  width: 34.5mm !important;
+  height: 31mm !important;
+  overflow: hidden !important;
+  text-align: center !important;
+}
+.a4-exact-template .a4x-logo-mark {
+  height: 18mm !important;
+  margin: 0 auto 1mm !important;
+  display: grid !important;
+  place-items: center !important;
+  gap: .65mm !important;
+}
+.a4-exact-template .a4x-logo-mark span {
+  display: block !important;
+  width: 18.5mm !important;
+  height: 4.6mm !important;
+  border: 2.1mm solid #24244f !important;
+  border-left-color: #079d83 !important;
+  border-top-color: #079d83 !important;
+  transform: skewY(-28deg) !important;
+}
+.a4-exact-template .a4x-logo strong {
+  display: block !important;
+  margin-top: -1mm !important;
+  color: #282452 !important;
+  font-size: 12.8pt !important;
+  font-weight: 900 !important;
+  line-height: .9 !important;
+  white-space: nowrap !important;
+}
+.a4-exact-template .a4x-logo small {
+  display: block !important;
+  margin-top: .4mm !important;
+  color: #999 !important;
+  font-size: 5.5pt !important;
+  letter-spacing: 1.6px !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+.a4-exact-template .a4x-title-row {
+  width: 190mm !important;
+  height: 8mm !important;
+  display: grid !important;
+  grid-template-columns: 72mm 67mm 51mm !important;
+  align-items: center !important;
+  border-bottom: 1.2px solid #000 !important;
+  overflow: hidden !important;
+  background: #fff !important;
+}
+.a4-exact-template .a4x-title-row > div {
+  padding: 0 1.6mm !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  font-size: 10pt !important;
+  line-height: 1 !important;
+}
+.a4-exact-template .a4x-title-row > div:nth-child(2) {
+  text-align: center !important;
+  font-size: 17pt !important;
+  font-weight: 900 !important;
+}
+.a4-exact-template .a4x-title-row > div:nth-child(3) {
+  text-align: right !important;
+  font-size: 7.2pt !important;
+  font-weight: 900 !important;
+}
+
+.a4-exact-template .a4x-detail-grid {
+  width: 190mm !important;
+  height: 39mm !important;
+  display: grid !important;
+  grid-template-columns: 76.5mm 113.5mm !important;
+  border-bottom: 1.2px solid #000 !important;
+  overflow: hidden !important;
+}
+.a4-exact-template .a4x-customer,
+.a4-exact-template .a4x-invoice-details {
+  padding: 0 1.5mm 1mm !important;
+  overflow: hidden !important;
+}
+.a4-exact-template .a4x-customer { border-right: 1.2px solid #000 !important; }
+.a4-exact-template .a4x-customer h3 {
+  margin: 0 0 .9mm !important;
+  padding: 0 !important;
+  text-align: center !important;
+  font-size: 7.3pt !important;
+  font-weight: 900 !important;
+  line-height: 1.25 !important;
+}
+.a4-exact-template .a4x-kv {
+  display: grid !important;
+  grid-template-columns: 19mm 1fr !important;
+  gap: 2.2mm !important;
+  margin: .7mm 0 !important;
+  min-height: 3.2mm !important;
+  font-size: 7.7pt !important;
+  line-height: 1.18 !important;
+  overflow: hidden !important;
+}
+.a4-exact-template .a4x-kv b { font-weight: 900 !important; }
+.a4-exact-template .a4x-kv span { overflow: hidden !important; }
+.a4-exact-template .a4x-pair {
+  display: grid !important;
+  grid-template-columns: 26mm 31mm 27mm 25mm !important;
+  gap: .9mm !important;
+  min-height: 4.9mm !important;
+  margin: 1.4mm 0 !important;
+  align-items: start !important;
+  font-size: 7.5pt !important;
+  line-height: 1.15 !important;
+}
+.a4-exact-template .a4x-pair b { font-weight: 600 !important; }
+.a4-exact-template .a4x-pair span { overflow: hidden !important; }
+
+.a4-exact-template .a4x-items {
+  width: 190mm !important;
+  max-width: 190mm !important;
+  height: auto !important;
+  margin: 5mm 0 0 !important;
+  border-collapse: collapse !important;
+  table-layout: fixed !important;
+  border: 1.2px solid #000 !important;
+  font-size: 7.55pt !important;
+  background: #fff !important;
+}
+.a4-exact-template .a4x-items col.c-sr { width: 7.5mm !important; }
+.a4-exact-template .a4x-items col.c-name { width: 54mm !important; }
+.a4-exact-template .a4x-items col.c-hsn { width: 21mm !important; }
+.a4-exact-template .a4x-items col.c-qty { width: 17mm !important; }
+.a4-exact-template .a4x-items col.c-rate { width: 21mm !important; }
+.a4-exact-template .a4x-items col.c-taxable { width: 21mm !important; }
+.a4-exact-template .a4x-items col.c-taxper { width: 9.5mm !important; }
+.a4-exact-template .a4x-items col.c-taxamt { width: 19mm !important; }
+.a4-exact-template .a4x-items col.c-total { width: 20mm !important; }
+.a4-exact-template .a4x-items th,
+.a4-exact-template .a4x-items td {
+  border: 1.2px solid #000 !important;
+  padding: .8mm .65mm !important;
+  vertical-align: top !important;
+  overflow: hidden !important;
+  background: #fff !important;
+  color: #000 !important;
+}
+.a4-exact-template .a4x-items th {
+  height: 7mm !important;
+  text-align: center !important;
+  font-size: 6.05pt !important;
+  font-weight: 900 !important;
+  line-height: 1.05 !important;
+}
+.a4-exact-template .a4x-items .a4x-item-row td { height: 6.2mm !important; line-height: 1.1 !important; }
+.a4-exact-template .a4x-fill-row td { border-top: 0 !important; border-bottom: 0 !important; }
+.a4-exact-template .a4x-total-row td { height: 5.4mm !important; vertical-align: middle !important; }
+.a4-exact-template .center { text-align: center !important; }
+.a4-exact-template .right { text-align: right !important; }
+.a4-exact-template .product-name { font-weight: 900 !important; }
+
+.a4-exact-template .a4x-bottom-grid {
+  width: 190mm !important;
+  height: 82mm !important;
+  display: grid !important;
+  grid-template-columns: 114mm 76mm !important;
+  border-bottom: 1.2px solid #000 !important;
+  overflow: hidden !important;
+}
+.a4-exact-template .a4x-left-bottom { border-right: 1.2px solid #000 !important; overflow: hidden !important; }
+.a4-exact-template .a4x-words { height: 17mm !important; border-bottom: 1.2px solid #000 !important; }
+.a4-exact-template .a4x-words h3,
+.a4-exact-template .a4x-bank h3,
+.a4-exact-template .a4x-terms h3 {
+  margin: 0 !important;
+  height: 5mm !important;
+  padding: 1mm 1.5mm !important;
+  text-align: center !important;
+  font-size: 7.25pt !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  border-bottom: 1.2px solid #000 !important;
+}
+.a4-exact-template .a4x-words p {
+  margin: 4.4mm 2mm 0 !important;
+  text-align: center !important;
+  font-size: 7.9pt !important;
+  line-height: 1.15 !important;
+}
+.a4-exact-template .a4x-bank { height: 43mm !important; border-bottom: 1.2px solid #000 !important; }
+.a4-exact-template .a4x-bank-inner {
+  height: 38mm !important;
+  display: grid !important;
+  grid-template-columns: 74mm 36mm !important;
+  gap: 2mm !important;
+  padding: 2mm 2mm 1mm !important;
+}
+.a4-exact-template .a4x-bank-list .a4x-kv {
+  grid-template-columns: 29mm 1fr !important;
+  margin: 1.6mm 0 !important;
+  font-size: 7.55pt !important;
+}
+.a4-exact-template .a4x-upi { text-align: center !important; font-size: 7.1pt !important; font-weight: 800 !important; align-self: center !important; }
+.a4-exact-template .a4x-qr {
+  width: 29mm !important;
+  height: 29mm !important;
+  margin: 0 auto .6mm !important;
+  border: 1px solid #000 !important;
+  display: grid !important;
+  place-items: center !important;
+  overflow: hidden !important;
+  font-size: 6pt !important;
+}
+.a4-exact-template .a4x-qr img { width: 100% !important; height: 100% !important; object-fit: cover !important; }
+.a4-exact-template .a4x-terms { height: 16mm !important; border-bottom: 1.2px solid #000 !important; overflow: hidden !important; }
+.a4-exact-template .a4x-terms > div { padding: 1.1mm 1.5mm !important; font-size: 7pt !important; line-height: 1.13 !important; overflow: hidden !important; }
+.a4-exact-template .a4x-customer-sign { height: 6mm !important; padding: 1.2mm 1.5mm !important; font-size: 7.4pt !important; }
+
+.a4-exact-template .a4x-right-bottom { position: relative !important; overflow: hidden !important; }
+.a4-exact-template .a4x-tax-summary { height: 33mm !important; border-bottom: 1.2px solid #000 !important; }
+.a4-exact-template .a4x-tax-summary > div:not(.eoe) {
+  display: grid !important;
+  grid-template-columns: 1fr 29mm !important;
+  height: 6.2mm !important;
+  align-items: center !important;
+  border-bottom: 1.2px solid #000 !important;
+  padding: 0 1.7mm !important;
+  font-size: 7.4pt !important;
+  line-height: 1 !important;
+}
+.a4-exact-template .a4x-tax-summary > div:not(.eoe) b:last-child { text-align: right !important; }
+.a4-exact-template .a4x-tax-summary .grand { height: 7.5mm !important; font-size: 8.8pt !important; }
+.a4-exact-template .a4x-tax-summary .grand b:last-child { font-size: 12pt !important; }
+.a4-exact-template .a4x-tax-summary .eoe {
+  height: 4.5mm !important;
+  padding: .9mm 1.7mm !important;
+  text-align: right !important;
+  font-size: 6.8pt !important;
+  font-weight: 900 !important;
+  border-bottom: 1.2px solid #000 !important;
+}
+.a4-exact-template .a4x-cert {
+  height: 19mm !important;
+  border-bottom: 1.2px solid #000 !important;
+  text-align: center !important;
+  padding: 3mm 2mm 0 !important;
+}
+.a4-exact-template .a4x-cert p { margin: 0 0 3mm !important; font-size: 6.5pt !important; font-weight: 700 !important; line-height: 1.12 !important; }
+.a4-exact-template .a4x-cert strong { font-size: 8.1pt !important; }
+.a4-exact-template .a4x-sign-note {
+  position: absolute !important;
+  left: 22mm !important;
+  top: 55mm !important;
+  width: 48mm !important;
+  transform: rotate(-16deg) !important;
+  text-align: center !important;
+  color: #555 !important;
+  font-size: 7.8pt !important;
+  line-height: 1.1 !important;
+}
+.a4-exact-template .a4x-authorised {
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  height: 5.8mm !important;
+  padding-top: 1.4mm !important;
+  border-top: 1.2px solid #000 !important;
+  text-align: center !important;
+  font-size: 6.6pt !important;
+  font-weight: 900 !important;
+}
+.a4-exact-template .a4x-thanks {
+  height: 5mm !important;
+  padding: 1.8mm 0 0 !important;
+  font-size: 8.4pt !important;
+  line-height: 1 !important;
+}
+
+@media print {
+  @page { size: A4 portrait; margin: 10mm !important; }
+  html, body.print-a4 {
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    background: #fff !important;
+  }
+  body.print-a4 .app-shell,
+  body.print-a4 .login-screen,
+  body.print-a4 #thermalInvoice { display: none !important; }
+  body.print-a4 #a4Invoice {
+    display: block !important;
+    width: 190mm !important;
+    height: 267mm !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    background: #fff !important;
+    page-break-after: avoid !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+  body.print-a4 .invoice-a4.a4-exact-template {
+    display: block !important;
+    width: 190mm !important;
+    height: 267mm !important;
+    max-width: 190mm !important;
+    max-height: 267mm !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    transform: none !important;
+    overflow: hidden !important;
+    box-shadow: none !important;
+    border: none !important;
+    page-break-after: avoid !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+}
+
+/* =====================================================
+   GST BillPro V2.7 - A4 PDF TRUE OVERRIDE
+   Final override based on uploaded bill(2).pdf.
+   This block intentionally comes last and overrides V2.6.
+===================================================== */
+
+.invoice-a4.a4-exact-template {
+  width: 194mm !important;
+  height: 281mm !important;
+  max-width: 194mm !important;
+  max-height: 281mm !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  background: #fff !important;
+  color: #000 !important;
+  border: none !important;
+  box-shadow: none !important;
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 8.15pt !important;
+  line-height: 1.14 !important;
+}
+
+.invoice-a4.a4-exact-template,
+.invoice-a4.a4-exact-template * {
+  box-sizing: border-box !important;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+
+/* Exact top header from PDF: title left, contact middle-right, logo right */
+.a4-exact-template .a4x-header {
+  width: 194mm !important;
+  height: 35mm !important;
+  position: relative !important;
+  overflow: hidden !important;
+  border-bottom: 1px solid #000 !important;
+}
+.a4-exact-template .a4x-company-name {
+  left: 0 !important;
+  top: 0 !important;
+  width: 146mm !important;
+  height: 10.2mm !important;
+  color: #252451 !important;
+  font-family: Georgia, 'Times New Roman', serif !important;
+  font-size: 23.8pt !important;
+  line-height: .9 !important;
+  letter-spacing: 0 !important;
+  font-weight: 900 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-transform: uppercase !important;
+}
+.a4-exact-template .a4x-tagline {
+  left: 0 !important;
+  top: 10.6mm !important;
+  width: 151mm !important;
+  height: 5.9mm !important;
+  padding: 1.1mm 4.5mm !important;
+  background: #079b83 !important;
+  color: #fff !important;
+  font-size: 9pt !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+}
+.a4-exact-template .a4x-address {
+  left: 0.8mm !important;
+  top: 18.8mm !important;
+  width: 86mm !important;
+  height: 14.8mm !important;
+  font-size: 8pt !important;
+  line-height: 1.22 !important;
+  overflow: hidden !important;
+  white-space: normal !important;
+  color: #000 !important;
+}
+.a4-exact-template .a4x-contact {
+  left: 112mm !important;
+  top: 18.8mm !important;
+  width: 42mm !important;
+  height: 14.8mm !important;
+  font-size: 7.9pt !important;
+  line-height: 1.22 !important;
+  text-align: left !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  color: #000 !important;
+}
+.a4-exact-template .a4x-contact div {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: clip !important;
+}
+.a4-exact-template .a4x-logo {
+  right: 0 !important;
+  top: 1.2mm !important;
+  width: 34mm !important;
+  height: 32mm !important;
+  text-align: center !important;
+  overflow: hidden !important;
+}
+.a4-exact-template .a4x-logo-mark {
+  height: 18mm !important;
+  margin: 0 auto .6mm !important;
+}
+.a4-exact-template .a4x-logo strong {
+  font-size: 12pt !important;
+  line-height: .9 !important;
+  color: #252451 !important;
+}
+.a4-exact-template .a4x-logo small {
+  font-size: 5.4pt !important;
+  letter-spacing: 1.4px !important;
+}
+
+/* PAN / title row */
+.a4-exact-template .a4x-title-row {
+  width: 194mm !important;
+  height: 7.4mm !important;
+  display: grid !important;
+  grid-template-columns: 65mm 80mm 49mm !important;
+  align-items: center !important;
+  border-bottom: 1px solid #000 !important;
+}
+.a4-exact-template .a4x-title-row > div {
+  padding: 0 1.4mm !important;
+  font-size: 9.6pt !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+}
+.a4-exact-template .a4x-title-row > div:nth-child(2) {
+  text-align: center !important;
+  font-size: 17.5pt !important;
+  font-weight: 900 !important;
+}
+.a4-exact-template .a4x-title-row > div:nth-child(3) {
+  text-align: right !important;
+  font-size: 7.2pt !important;
+  font-weight: 900 !important;
+}
+
+/* Customer / invoice detail split */
+.a4-exact-template .a4x-detail-grid {
+  width: 194mm !important;
+  height: 39.5mm !important;
+  display: grid !important;
+  grid-template-columns: 78mm 116mm !important;
+  border-bottom: 1px solid #000 !important;
+  overflow: hidden !important;
+}
+.a4-exact-template .a4x-customer,
+.a4-exact-template .a4x-invoice-details {
+  padding: 0 1.4mm 1mm !important;
+  overflow: hidden !important;
+}
+.a4-exact-template .a4x-customer {
+  border-right: 1px solid #000 !important;
+}
+.a4-exact-template .a4x-customer h3 {
+  margin: 0 0 .8mm !important;
+  height: 4.6mm !important;
+  font-size: 7.4pt !important;
+  line-height: 4.6mm !important;
+  text-align: center !important;
+  font-weight: 900 !important;
+}
+.a4-exact-template .a4x-kv {
+  display: grid !important;
+  grid-template-columns: 18mm 1fr !important;
+  column-gap: 3mm !important;
+  min-height: 4.2mm !important;
+  margin: .15mm 0 !important;
+  font-size: 7.9pt !important;
+  line-height: 1.14 !important;
+}
+.a4-exact-template .a4x-kv b { font-weight: 900 !important; }
+.a4-exact-template .a4x-kv span { overflow: hidden !important; }
+.a4-exact-template .a4x-pair {
+  display: grid !important;
+  grid-template-columns: 25mm 34mm 25mm 28mm !important;
+  column-gap: .9mm !important;
+  min-height: 6mm !important;
+  margin: .7mm 0 !important;
+  font-size: 7.6pt !important;
+  line-height: 1.1 !important;
+  align-items: start !important;
+}
+.a4-exact-template .a4x-pair b { font-weight: 700 !important; }
+
+/* Product table - exact PDF-like width and border alignment */
+.a4-exact-template .a4x-items {
+  width: 194mm !important;
+  max-width: 194mm !important;
+  margin: 5mm 0 0 !important;
+  border-collapse: collapse !important;
+  table-layout: fixed !important;
+  border: 1px solid #000 !important;
+  font-size: 7.4pt !important;
+}
+.a4-exact-template .a4x-items col.c-sr { width: 7.5mm !important; }
+.a4-exact-template .a4x-items col.c-name { width: 55mm !important; }
+.a4-exact-template .a4x-items col.c-hsn { width: 20mm !important; }
+.a4-exact-template .a4x-items col.c-qty { width: 17mm !important; }
+.a4-exact-template .a4x-items col.c-rate { width: 21mm !important; }
+.a4-exact-template .a4x-items col.c-taxable { width: 22mm !important; }
+.a4-exact-template .a4x-items col.c-taxper { width: 9mm !important; }
+.a4-exact-template .a4x-items col.c-taxamt { width: 19mm !important; }
+.a4-exact-template .a4x-items col.c-total { width: 23.5mm !important; }
+.a4-exact-template .a4x-items th,
+.a4-exact-template .a4x-items td {
+  border: 1px solid #000 !important;
+  padding: .55mm .6mm !important;
+  vertical-align: top !important;
+  overflow: hidden !important;
+  color: #000 !important;
+  background: #fff !important;
+}
+.a4-exact-template .a4x-items th {
+  height: 7.3mm !important;
+  text-align: center !important;
+  font-size: 5.95pt !important;
+  line-height: 1.05 !important;
+  font-weight: 900 !important;
+}
+.a4-exact-template .a4x-items .a4x-item-row td {
+  height: 6.5mm !important;
+  line-height: 1.08 !important;
+}
+.a4-exact-template .a4x-fill-row td {
+  height: auto !important;
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+}
+.a4-exact-template .a4x-total-row td {
+  height: 5.2mm !important;
+  vertical-align: middle !important;
+}
+
+/* Bottom blocks */
+.a4-exact-template .a4x-bottom-grid {
+  width: 194mm !important;
+  height: 77mm !important;
+  display: grid !important;
+  grid-template-columns: 116mm 78mm !important;
+  border-bottom: 1px solid #000 !important;
+  overflow: hidden !important;
+}
+.a4-exact-template .a4x-left-bottom { border-right: 1px solid #000 !important; }
+.a4-exact-template .a4x-words {
+  height: 15mm !important;
+  border-bottom: 1px solid #000 !important;
+}
+.a4-exact-template .a4x-words h3,
+.a4-exact-template .a4x-bank h3,
+.a4-exact-template .a4x-terms h3 {
+  height: 5mm !important;
+  margin: 0 !important;
+  padding: 1mm 1.5mm !important;
+  text-align: center !important;
+  font-size: 7.2pt !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  border-bottom: 1px solid #000 !important;
+}
+.a4-exact-template .a4x-words p {
+  margin: 3.6mm 2mm 0 !important;
+  text-align: center !important;
+  font-size: 7.8pt !important;
+}
+.a4-exact-template .a4x-bank {
+  height: 43mm !important;
+  border-bottom: 1px solid #000 !important;
+}
+.a4-exact-template .a4x-bank-inner {
+  height: 38mm !important;
+  display: grid !important;
+  grid-template-columns: 73mm 39mm !important;
+  gap: 1mm !important;
+  padding: 1.8mm 1.8mm .8mm !important;
+}
+.a4-exact-template .a4x-bank-list .a4x-kv {
+  grid-template-columns: 30mm 1fr !important;
+  min-height: 5.3mm !important;
+  font-size: 7.5pt !important;
+}
+.a4-exact-template .a4x-upi {
+  align-self: center !important;
+  text-align: center !important;
+  font-size: 7.1pt !important;
+  font-weight: 900 !important;
+}
+.a4-exact-template .a4x-qr {
+  width: 30mm !important;
+  height: 30mm !important;
+  margin: 0 auto .4mm !important;
+  border: 1px solid #000 !important;
+}
+.a4-exact-template .a4x-terms {
+  height: 14mm !important;
+  border-bottom: 1px solid #000 !important;
+  overflow: hidden !important;
+}
+.a4-exact-template .a4x-terms > div {
+  padding: .8mm 1.4mm !important;
+  font-size: 6.9pt !important;
+  line-height: 1.08 !important;
+}
+.a4-exact-template .a4x-customer-sign {
+  height: 5mm !important;
+  padding: 1mm 1.4mm !important;
+  font-size: 7.2pt !important;
+}
+.a4-exact-template .a4x-right-bottom { position: relative !important; overflow: hidden !important; }
+.a4-exact-template .a4x-tax-summary { height: 35mm !important; border-bottom: 1px solid #000 !important; }
+.a4-exact-template .a4x-tax-summary > div:not(.eoe) {
+  display: grid !important;
+  grid-template-columns: 1fr 28mm !important;
+  height: 6.4mm !important;
+  align-items: center !important;
+  border-bottom: 1px solid #000 !important;
+  padding: 0 1.8mm !important;
+  font-size: 7.45pt !important;
+}
+.a4-exact-template .a4x-tax-summary .grand {
+  height: 7.8mm !important;
+  font-size: 8.8pt !important;
+}
+.a4-exact-template .a4x-tax-summary .grand b:last-child { font-size: 11.4pt !important; }
+.a4-exact-template .a4x-tax-summary .eoe {
+  height: 4.8mm !important;
+  padding: 1mm 1.8mm !important;
+  text-align: right !important;
+  font-size: 6.8pt !important;
+  font-weight: 900 !important;
+  border-bottom: 1px solid #000 !important;
+}
+.a4-exact-template .a4x-cert {
+  height: 19mm !important;
+  border-bottom: 1px solid #000 !important;
+  text-align: center !important;
+  padding: 2.8mm 1.8mm 0 !important;
+}
+.a4-exact-template .a4x-cert p {
+  margin: 0 0 3mm !important;
+  font-size: 6.5pt !important;
+  font-weight: 700 !important;
+}
+.a4-exact-template .a4x-cert strong { font-size: 7.9pt !important; }
+.a4-exact-template .a4x-sign-note {
+  position: absolute !important;
+  left: 26mm !important;
+  top: 55mm !important;
+  width: 45mm !important;
+  transform: rotate(-16deg) !important;
+  text-align: center !important;
+  color: #444 !important;
+  font-size: 7.4pt !important;
+  line-height: 1.08 !important;
+}
+.a4-exact-template .a4x-authorised {
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  height: 5.5mm !important;
+  border-top: 1px solid #000 !important;
+  text-align: center !important;
+  padding-top: 1.25mm !important;
+  font-size: 6.5pt !important;
+  font-weight: 900 !important;
+}
+.a4-exact-template .a4x-thanks {
+  height: 4.5mm !important;
+  padding-top: 1.3mm !important;
+  font-size: 8.2pt !important;
+}
+
+@media print {
+  @page { size: A4 portrait; margin: 8mm !important; }
+  html, body.print-a4 {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #fff !important;
+    overflow: visible !important;
+  }
+  body.print-a4 .app-shell,
+  body.print-a4 .login-screen,
+  body.print-a4 #thermalInvoice { display: none !important; }
+  body.print-a4 #a4Invoice {
+    display: block !important;
+    width: 194mm !important;
+    height: 281mm !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    background: #fff !important;
+    page-break-after: avoid !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+  body.print-a4 .invoice-a4.a4-exact-template {
+    width: 194mm !important;
+    height: 281mm !important;
+    max-width: 194mm !important;
+    max-height: 281mm !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    transform: none !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+}
+
+/* =====================================================
+   GST BillPro V2.8 - A4 BORDER + SAFE PRINT AREA + VT LOGO
+   Fixes: left/right/bottom cut, adds clear border, replaces logo with VT.
+===================================================== */
+.invoice-a4.a4-exact-template {
+  --a4safe: 186mm;
+  --a4height: 270mm;
+  width: var(--a4safe) !important;
+  height: var(--a4height) !important;
+  max-width: var(--a4safe) !important;
+  max-height: var(--a4height) !important;
+  padding: 0 !important;
+  margin: 0 auto !important;
+  border: 1.4px solid #000 !important;
+  overflow: hidden !important;
+  background: #fff !important;
+  box-shadow: none !important;
+  font-size: 7.85pt !important;
+  line-height: 1.12 !important;
+}
+
+.invoice-a4.a4-exact-template * {
+  box-sizing: border-box !important;
+}
+
+/* Safe inner width: all rows use same width so right side will not cut */
+.a4-exact-template .a4x-header,
+.a4-exact-template .a4x-title-row,
+.a4-exact-template .a4x-detail-grid,
+.a4-exact-template .a4x-items,
+.a4-exact-template .a4x-bottom-grid {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Header closer to given PDF but inside printable area */
+.a4-exact-template .a4x-header {
+  height: 32mm !important;
+  border-bottom: 1.1px solid #000 !important;
+}
+.a4-exact-template .a4x-company-name {
+  left: 4mm !important;
+  top: 2.3mm !important;
+  width: 122mm !important;
+  height: 8.5mm !important;
+  font-size: 21pt !important;
+  line-height: .95 !important;
+}
+.a4-exact-template .a4x-tagline {
+  left: 4mm !important;
+  top: 11.7mm !important;
+  width: 126mm !important;
+  height: 5.2mm !important;
+  padding: 1mm 3mm !important;
+  font-size: 7.55pt !important;
+}
+.a4-exact-template .a4x-address {
+  left: 4mm !important;
+  top: 18.5mm !important;
+  width: 86mm !important;
+  height: 10.5mm !important;
+  font-size: 6.7pt !important;
+  line-height: 1.25 !important;
+}
+.a4-exact-template .a4x-contact {
+  left: 112mm !important;
+  top: 18.5mm !important;
+  width: 36mm !important;
+  height: 10.5mm !important;
+  font-size: 6.6pt !important;
+  line-height: 1.25 !important;
+  text-align: left !important;
+}
+
+/* Replace old logo with clean VT letters */
+.a4-exact-template .a4x-logo.vt-logo-box {
+  right: 4mm !important;
+  top: 2.5mm !important;
+  width: 27mm !important;
+  height: 26mm !important;
+  text-align: center !important;
+  overflow: hidden !important;
+  border: 0 !important;
+}
+.a4-exact-template .a4x-vt-logo {
+  width: 22mm !important;
+  height: 14mm !important;
+  margin: 0 auto 1mm !important;
+  display: grid !important;
+  place-items: center !important;
+  font-family: Georgia, 'Times New Roman', serif !important;
+  font-size: 22pt !important;
+  line-height: 1 !important;
+  font-weight: 950 !important;
+  letter-spacing: -1px !important;
+  color: #252451 !important;
+  border: 2px solid #079b83 !important;
+  border-radius: 1.5mm !important;
+}
+.a4-exact-template .a4x-logo.vt-logo-box strong {
+  display: block !important;
+  font-size: 7.8pt !important;
+  line-height: 1 !important;
+  color: #252451 !important;
+  letter-spacing: .2px !important;
+}
+.a4-exact-template .a4x-logo.vt-logo-box small {
+  display: block !important;
+  margin-top: .4mm !important;
+  font-size: 5.2pt !important;
+  color: #777 !important;
+  letter-spacing: 1px !important;
+}
+.a4-exact-template .a4x-logo-mark,
+.a4-exact-template .a4x-logo-mark span { display: none !important; }
+
+/* PAN / title row stays within new border */
+.a4-exact-template .a4x-title-row {
+  height: 7.2mm !important;
+  grid-template-columns: 58mm 80mm 48mm !important;
+  border-bottom: 1.1px solid #000 !important;
+}
+.a4-exact-template .a4x-title-row > div { font-size: 8.2pt !important; }
+.a4-exact-template .a4x-title-row > div:nth-child(2) { font-size: 15.4pt !important; }
+.a4-exact-template .a4x-title-row > div:nth-child(3) { font-size: 6.4pt !important; }
+
+/* Customer/invoice section */
+.a4-exact-template .a4x-detail-grid {
+  height: 37mm !important;
+  grid-template-columns: 78mm 108mm !important;
+  border-bottom: 1.1px solid #000 !important;
+}
+.a4-exact-template .a4x-customer,
+.a4-exact-template .a4x-invoice-details { padding: 0 1.2mm .8mm !important; }
+.a4-exact-template .a4x-customer { border-right: 1.1px solid #000 !important; }
+.a4-exact-template .a4x-customer h3 { height: 4.2mm !important; line-height: 4.2mm !important; font-size: 6.7pt !important; }
+.a4-exact-template .a4x-kv {
+  grid-template-columns: 17mm 1fr !important;
+  column-gap: 2mm !important;
+  min-height: 3.8mm !important;
+  font-size: 7pt !important;
+}
+.a4-exact-template .a4x-pair {
+  grid-template-columns: 23mm 27mm 23mm 26mm !important;
+  column-gap: 1mm !important;
+  min-height: 5.5mm !important;
+  font-size: 6.8pt !important;
+}
+
+/* Product table fixed to exact safe width */
+.a4-exact-template .a4x-items {
+  margin: 4.2mm 0 0 !important;
+  width: 100% !important;
+  table-layout: fixed !important;
+  border: 1.1px solid #000 !important;
+  font-size: 6.8pt !important;
+}
+.a4-exact-template .a4x-items col.c-sr { width: 7mm !important; }
+.a4-exact-template .a4x-items col.c-name { width: 50mm !important; }
+.a4-exact-template .a4x-items col.c-hsn { width: 18mm !important; }
+.a4-exact-template .a4x-items col.c-qty { width: 15mm !important; }
+.a4-exact-template .a4x-items col.c-rate { width: 19mm !important; }
+.a4-exact-template .a4x-items col.c-taxable { width: 20mm !important; }
+.a4-exact-template .a4x-items col.c-taxper { width: 8mm !important; }
+.a4-exact-template .a4x-items col.c-taxamt { width: 18mm !important; }
+.a4-exact-template .a4x-items col.c-total { width: 31mm !important; }
+.a4-exact-template .a4x-items th,
+.a4-exact-template .a4x-items td {
+  border: 1.1px solid #000 !important;
+  padding: .45mm .5mm !important;
+  overflow: hidden !important;
+}
+.a4-exact-template .a4x-items th { height: 6.6mm !important; font-size: 5.4pt !important; }
+.a4-exact-template .a4x-items .a4x-item-row td { height: 5.9mm !important; }
+.a4-exact-template .a4x-fill-row,
+.a4-exact-template .a4x-fill-row td { height: 61mm !important; }
+.a4-exact-template .a4x-total-row td { height: 4.8mm !important; }
+
+/* Bottom section: keep inside border and avoid bottom cut */
+.a4-exact-template .a4x-bottom-grid {
+  height: 69mm !important;
+  grid-template-columns: 110mm 76mm !important;
+  border-bottom: 1.1px solid #000 !important;
+}
+.a4-exact-template .a4x-left-bottom { border-right: 1.1px solid #000 !important; overflow: hidden !important; }
+.a4-exact-template .a4x-words { height: 13mm !important; border-bottom: 1.1px solid #000 !important; }
+.a4-exact-template .a4x-words h3,
+.a4-exact-template .a4x-bank h3,
+.a4-exact-template .a4x-terms h3 {
+  height: 4.4mm !important;
+  padding: .8mm 1.2mm !important;
+  font-size: 6.5pt !important;
+  border-bottom: 1.1px solid #000 !important;
+}
+.a4-exact-template .a4x-words p { margin: 2.5mm 2mm 0 !important; font-size: 6.8pt !important; }
+.a4-exact-template .a4x-bank { height: 38mm !important; border-bottom: 1.1px solid #000 !important; }
+.a4-exact-template .a4x-bank-inner {
+  height: 33.6mm !important;
+  grid-template-columns: 68mm 37mm !important;
+  gap: 1mm !important;
+  padding: 1.4mm 1.5mm .6mm !important;
+}
+.a4-exact-template .a4x-bank-list .a4x-kv {
+  grid-template-columns: 27mm 1fr !important;
+  min-height: 4.3mm !important;
+  font-size: 6.6pt !important;
+}
+.a4-exact-template .a4x-upi { font-size: 6.5pt !important; }
+.a4-exact-template .a4x-qr { width: 27mm !important; height: 27mm !important; }
+.a4-exact-template .a4x-terms { height: 13.2mm !important; border-bottom: 1.1px solid #000 !important; }
+.a4-exact-template .a4x-terms > div { font-size: 6.1pt !important; line-height: 1.05 !important; padding: .7mm 1.2mm !important; }
+.a4-exact-template .a4x-customer-sign { height: 4.8mm !important; padding: .9mm 1.2mm !important; font-size: 6.4pt !important; }
+.a4-exact-template .a4x-tax-summary { height: 32mm !important; border-bottom: 1.1px solid #000 !important; }
+.a4-exact-template .a4x-tax-summary > div:not(.eoe) {
+  grid-template-columns: 1fr 27mm !important;
+  height: 5.8mm !important;
+  padding: 0 1.4mm !important;
+  font-size: 6.7pt !important;
+  border-bottom: 1.1px solid #000 !important;
+}
+.a4-exact-template .a4x-tax-summary .grand { height: 7mm !important; font-size: 7.8pt !important; }
+.a4-exact-template .a4x-tax-summary .grand b:last-child { font-size: 9.5pt !important; }
+.a4-exact-template .a4x-tax-summary .eoe { height: 4mm !important; font-size: 6pt !important; padding: .8mm 1.4mm !important; }
+.a4-exact-template .a4x-cert { height: 17mm !important; padding: 2.2mm 1.5mm 0 !important; border-bottom: 1.1px solid #000 !important; }
+.a4-exact-template .a4x-cert p { font-size: 5.8pt !important; margin-bottom: 2.4mm !important; }
+.a4-exact-template .a4x-cert strong { font-size: 7pt !important; }
+.a4-exact-template .a4x-sign-note { top: 50mm !important; left: 26mm !important; width: 42mm !important; font-size: 6.4pt !important; }
+.a4-exact-template .a4x-authorised { height: 4.7mm !important; padding-top: .9mm !important; font-size: 5.8pt !important; }
+.a4-exact-template .a4x-thanks { height: 4mm !important; padding-top: .8mm !important; font-size: 7pt !important; }
+
+@media print {
+  @page { size: A4 portrait; margin: 10mm !important; }
+  html, body.print-a4 { margin: 0 !important; padding: 0 !important; background: #fff !important; overflow: visible !important; }
+  body.print-a4 .app-shell,
+  body.print-a4 .login-screen,
+  body.print-a4 #thermalInvoice { display: none !important; }
+  body.print-a4 #a4Invoice {
+    display: block !important;
+    width: 186mm !important;
+    height: 270mm !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    background: #fff !important;
+    page-break-after: avoid !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+  body.print-a4 .invoice-a4.a4-exact-template {
+    width: 186mm !important;
+    height: 270mm !important;
+    max-width: 186mm !important;
+    max-height: 270mm !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    transform: none !important;
+    border: 1.4px solid #000 !important;
+    box-shadow: none !important;
+  }
+}
+
+/* =====================================================
+   GST BillPro V3 - Vinayaga Traders final print templates
+   Own premium A4 + Thermal design. Old print templates ignored.
+===================================================== */
+
+.vt-a4,
+.vt-a4 * { box-sizing: border-box; }
+
+.vt-a4 {
+  width: 198mm;
+  min-height: 285mm;
+  margin: 0 auto;
+  background: #fff;
+  color: #111827;
+  border: 1.2px solid #0b3f78;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-size: 8.2pt;
+  line-height: 1.22;
+  overflow: hidden;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.vt-a4-header {
+  display: grid;
+  grid-template-columns: 34mm 1fr 62mm;
+  gap: 4mm;
+  min-height: 44mm;
+  padding: 5mm 5mm 3mm;
+  border-bottom: 1px solid #0b3f78;
+  align-items: center;
+}
+
+.vt-logo {
+  width: 31mm;
+  height: 31mm;
+  border: 1.2px solid #0b3f78;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  color: #0b3f78;
+  font-weight: 950;
+  font-size: 24pt;
+  letter-spacing: -2px;
+  background: radial-gradient(circle at 70% 35%, rgba(22, 128, 58, .10), transparent 50%);
+}
+.vt-logo::after {
+  content: "";
+  position: absolute;
+  width: 21mm;
+  height: 3.3mm;
+  background: #16803a;
+  transform: rotate(-17deg);
+  right: 2mm;
+  bottom: 9mm;
+  border-radius: 999px;
+  z-index: 0;
+  opacity: .92;
+}
+.vt-logo span { position: relative; z-index: 1; }
+.vt-logo span::first-letter { color: #0b3f78; }
+
+.vt-company h1 {
+  margin: 0 0 1mm;
+  font-size: 22pt;
+  line-height: 1;
+  letter-spacing: .3px;
+  color: #16803a;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+.vt-company h1 span { color: #0b3f78; }
+.vt-company h2 {
+  margin: 0 0 2mm;
+  font-size: 8.6pt;
+  color: #0b3f78;
+  font-weight: 850;
+}
+.vt-company p,
+.vt-company div {
+  margin: .8mm 0;
+  color: #1f2937;
+  font-size: 7.7pt;
+  line-height: 1.25;
+}
+.vt-company .sep { padding: 0 3mm; color: #0b3f78; }
+
+.vt-invoice-meta {
+  border-left: 1px solid #0b3f78;
+  padding-left: 4mm;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: .8mm;
+  font-size: 7.6pt;
+}
+.vt-invoice-meta div { display: grid; grid-template-columns: 25mm 1fr; gap: 2mm; }
+.vt-invoice-meta b { color: #0b3f78; font-weight: 850; }
+.vt-invoice-meta span { font-weight: 750; }
+.vt-invoice-meta hr { width: 100%; border: 0; border-top: 1px solid #0b3f78; margin: 1mm 0; }
+
+.vt-title {
+  height: 13mm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5mm;
+  color: #0b3f78;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 18pt;
+  font-weight: 900;
+  letter-spacing: .5px;
+}
+.vt-title span { width: 23mm; height: 1px; background: #16803a; position: relative; }
+.vt-title span::after { content: ""; width: 2mm; height: 2mm; background: #16803a; border-radius: 50%; position: absolute; right: -3mm; top: -0.8mm; }
+.vt-title span:last-child::after { left: -3mm; right: auto; }
+
+.vt-two-panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2mm;
+  padding: 0 2mm 2mm;
+}
+.vt-panel {
+  border: 1px solid #0b3f78;
+  border-radius: 2mm;
+  min-height: 35mm;
+  padding: 3mm;
+  overflow: hidden;
+}
+.vt-panel h3 {
+  margin: -1mm 0 2mm;
+  display: inline-block;
+  background: #0b3f78;
+  color: #fff;
+  border-radius: .8mm;
+  padding: 1.1mm 2.5mm;
+  font-size: 8pt;
+  font-weight: 900;
+}
+.vt-panel strong { display: block; font-size: 9.4pt; margin-bottom: 1mm; }
+.vt-panel p { margin: 0 0 1.5mm; line-height: 1.32; }
+.vt-kv { display: grid; grid-template-columns: 25mm 1fr; gap: 2mm; margin: 1mm 0; }
+.vt-kv b { color: #111827; }
+
+.vt-items {
+  width: calc(100% - 4mm);
+  margin: 0 2mm;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 7.05pt;
+}
+.vt-items col.sno { width: 7mm; }
+.vt-items col.pdesc { width: 38mm; }
+.vt-items col.hsn { width: 14mm; }
+.vt-items col.batch { width: 13mm; }
+.vt-items col.qty { width: 9mm; }
+.vt-items col.unit { width: 9mm; }
+.vt-items col.rate { width: 15mm; }
+.vt-items col.discount { width: 15mm; }
+.vt-items col.taxable { width: 19mm; }
+.vt-items col.tax { width: 9mm; }
+.vt-items col.line { width: 20mm; }
+.vt-items th {
+  background: #0b3f78;
+  color: #fff;
+  border: .7px solid #8eb0d5;
+  padding: 1.6mm .7mm;
+  text-align: center;
+  font-weight: 900;
+  line-height: 1.12;
+}
+.vt-items td {
+  border: .65px solid #b8c8da;
+  padding: 1.65mm .8mm;
+  height: 7.2mm;
+  vertical-align: middle;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.vt-items tbody tr.empty td { height: 7.2mm; color: transparent; }
+.vt-items tfoot td { height: 7mm; background: #f7fbff; font-weight: 850; }
+.vt-items .c { text-align: center; }
+.vt-items .r { text-align: right; }
+.vt-items .desc { font-weight: 720; }
+.vt-items .strong { font-weight: 900; }
+
+.vt-lower-grid {
+  display: grid;
+  grid-template-columns: 1.12fr .88fr;
+  gap: 0;
+  margin: 2mm 2mm 0;
+  border: 1px solid #b8c8da;
+  border-bottom: 0;
+}
+.vt-left-block { border-right: 1px solid #b8c8da; }
+.vt-words { height: 22mm; padding: 3mm; border-bottom: 1px solid #b8c8da; }
+.vt-words h4, .vt-bank h4, .vt-upi h4, .vt-terms h4 { margin: 0 0 2mm; color: #16803a; font-size: 8.8pt; font-weight: 900; }
+.vt-words p { margin: 0; font-weight: 750; font-size: 8.2pt; line-height: 1.35; }
+.vt-bankpay { display: grid; grid-template-columns: 1fr 33mm; min-height: 49mm; }
+.vt-bank { padding: 3mm; }
+.vt-bank .vt-kv { grid-template-columns: 24mm 1fr; font-size: 7.6pt; margin: 1.7mm 0; }
+.vt-upi { border-left: 1px dashed #8eb0d5; padding: 3mm 2mm; text-align: center; }
+.vt-qr, .vt-t-qr { display: inline-flex; align-items: center; justify-content: center; background: #fff; color: #0b3f78; border: 1px dashed #8eb0d5; font-weight: 850; text-align: center; }
+.vt-qr { width: 25mm; height: 25mm; margin: 1mm auto; font-size: 6.7pt; }
+.vt-qr img, .vt-t-qr img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.vt-upi small { display: block; font-size: 6pt; }
+
+.vt-totals { font-size: 8.2pt; }
+.vt-totals div { display: grid; grid-template-columns: 1fr 32mm; border-bottom: 1px solid #b8c8da; min-height: 6.4mm; align-items: center; }
+.vt-totals span { padding-left: 3mm; }
+.vt-totals b { text-align: right; padding-right: 3mm; font-weight: 800; }
+.vt-totals .green { color: #16803a; font-weight: 900; }
+.vt-totals .grand { background: #0b3f78; color: #fff; font-size: 10.2pt; font-weight: 900; min-height: 8mm; }
+.vt-totals .grand b { font-size: 14pt; }
+.vt-totals .balance { color: #16803a; font-size: 10pt; font-weight: 900; }
+.vt-totals .balance b { font-size: 13pt; }
+
+.vt-bottom-panels { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; margin: 3mm 2mm 0; }
+.vt-terms, .vt-sign { border: 1px solid #8eb0d5; border-radius: 2mm; min-height: 38mm; padding: 3mm; }
+.vt-terms ol { margin: 0 0 0 4mm; padding: 0; line-height: 1.45; font-size: 7.5pt; }
+.vt-sign h4 { margin: 0; color: #0b3f78; font-size: 10pt; }
+.vt-sign div { height: 17mm; border-bottom: 1px dashed #0b3f78; margin: 4mm 18mm 2mm; }
+.vt-sign b { display: block; text-align: center; color: #0b3f78; font-size: 8pt; }
+
+.vt-footer { margin: 3mm 0 0; background: #0b3f78; color: #fff; height: 8.5mm; display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; text-align: center; font-weight: 850; font-size: 8.6pt; }
+.vt-footer span + span { border-left: 1px solid rgba(255,255,255,.55); }
+.vt-note { text-align: center; color: #0b3f78; font-size: 8pt; padding: 1.2mm 0; }
+
+/* Thermal Vinayaga Traders */
+.vt-thermal,
+.vt-thermal * { box-sizing: border-box; }
+.vt-thermal { width: 76mm; margin: 0 auto; background: #fff; color: #111; font-family: Inter, Arial, Helvetica, sans-serif; font-size: 9.2pt; line-height: 1.24; padding: 4mm 4mm 3mm; border-left: 1px dashed #ccc; border-right: 1px dashed #ccc; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.vt-t-logo { width: 24mm; height: 24mm; margin: 0 auto 1mm; border: 1.2px solid #0b3f78; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #0b3f78; font-size: 20pt; font-weight: 950; letter-spacing: -1.5px; position: relative; }
+.vt-t-logo::after { content:""; position:absolute; width: 16mm; height: 2.5mm; background:#16803a; transform: rotate(-17deg); right: 1.2mm; bottom: 7mm; border-radius:999px; z-index:0; }
+.vt-t-logo span { position: relative; z-index: 1; }
+.vt-thermal h1 { margin: 0; text-align: center; color: #0b3f78; font-size: 19pt; line-height: .92; font-weight: 950; }
+.vt-thermal h1 em { color: #16803a; font-style: normal; }
+.vt-thermal h2 { margin: 1mm 0 2mm; text-align: center; color: #0b3f78; font-size: 8.8pt; line-height: 1.18; }
+.vt-thermal p { margin: 1mm 0; text-align: center; }
+.vt-thermal .addr { line-height: 1.25; }
+.vt-thermal .dash { border-top: 1.2px dashed #0b3f78; margin: 2.2mm 0; }
+.vt-thermal h3 { margin: 0 0 2mm; text-align:center; color:#0b3f78; font-family: Georgia, 'Times New Roman', serif; font-size: 16pt; }
+.vt-thermal .meta { display:grid; grid-template-columns: 21mm 1fr 17mm 1fr; gap: 1.2mm 1.8mm; font-size: 8.4pt; }
+.vt-thermal .meta b { color:#111; }
+.vt-t-items { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.vt-t-items th { background:#0b3f78; color:#fff; padding:1.6mm .7mm; font-size: 8.2pt; text-transform: uppercase; }
+.vt-t-items th:nth-child(1){ width: 6mm; } .vt-t-items th:nth-child(2){ width: 29mm; } .vt-t-items th:nth-child(3){ width: 11mm; } .vt-t-items th:nth-child(4){ width: 11mm; } .vt-t-items th:nth-child(5){ width: 14mm; }
+.vt-t-items td { border-bottom: .6px solid #d8e1ec; padding: 1.4mm .7mm; font-size: 8.4pt; vertical-align: top; }
+.vt-t-items .c { text-align:center; } .vt-t-items .r { text-align:right; } .vt-t-items .no { text-align:center; }
+.vt-t-sum div { display:grid; grid-template-columns: 1fr 24mm; min-height: 5.2mm; align-items:center; }
+.vt-t-sum b { text-align:right; }
+.vt-t-sum .green { color:#16803a; font-weight:900; }
+.vt-t-sum .grand { background:#0b3f78; color:#fff; margin: 1mm -1mm; padding: 1mm; font-size: 12pt; font-weight: 900; }
+.vt-t-pay { border:1px solid #0b3f78; border-radius: 2mm; padding: 2mm; display:grid; grid-template-columns: 33mm 1fr; gap: 3mm; align-items:center; text-align:center; }
+.vt-t-qr { width: 26mm; height: 26mm; margin: 1mm auto; font-size: 6.5pt; }
+.vt-t-pay p { color:#0b3f78; font-weight:900; }
+.vt-t-terms { font-size: 7.8pt; line-height:1.35; margin-top: 2mm; }
+.vt-t-terms b { color:#0b3f78; font-size: 9pt; }
+.vt-t-thanks { text-align:center; color:#0b3f78; font-weight:950; margin: 2mm 0; font-size: 10pt; }
+.vt-t-note { background:#0b3f78; color:#fff; border-radius: 1mm; text-align:center; font-size: 8pt; padding: 1.3mm; }
+
+@media print {
+  @page { size: A4 portrait; margin: 6mm; }
+
+  body.print-a4,
+  body.print-thermal { background: #fff !important; margin: 0 !important; padding: 0 !important; overflow: visible !important; }
+
+  body.print-a4 .app-shell,
+  body.print-a4 .login-screen,
+  body.print-a4 #thermalInvoice,
+  body.print-thermal .app-shell,
+  body.print-thermal .login-screen,
+  body.print-thermal #a4Invoice { display: none !important; }
+
+  body.print-a4 #a4Invoice { display: block !important; width: 198mm !important; height: 285mm !important; margin: 0 auto !important; padding: 0 !important; overflow: hidden !important; background: #fff !important; }
+  body.print-a4 .vt-a4 { width: 198mm !important; min-height: 285mm !important; max-height: 285mm !important; margin: 0 auto !important; box-shadow: none !important; page-break-inside: avoid !important; break-inside: avoid !important; }
+
+  body.print-thermal { width: 80mm !important; }
+  body.print-thermal #thermalInvoice { display: block !important; width: 80mm !important; margin: 0 !important; padding: 0 !important; background:#fff !important; }
+  body.print-thermal .vt-thermal { width: 76mm !important; margin: 0 auto !important; border: none !important; box-shadow: none !important; page-break-inside: avoid !important; break-inside: avoid !important; }
+}
+
+@media screen {
+  #a4Invoice .vt-a4 { box-shadow: 0 10px 30px rgba(15,23,42,.16); }
+  #thermalInvoice .vt-thermal { box-shadow: 0 10px 30px rgba(15,23,42,.16); }
+}
+
+
+/* =====================================================
+   GST BillPro V3.1 FINAL PRINT ALIGNMENT FIX
+   Fixes A4 small output + thermal receipt page alignment.
+   Keep this block at the VERY BOTTOM of styles.css.
+===================================================== */
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  html,
+  body.print-a4,
+  body.print-thermal {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    overflow: hidden !important;
+  }
+
+  body.print-a4 .app-shell,
+  body.print-a4 .login-screen,
+  body.print-a4 #thermalInvoice,
+  body.print-thermal .app-shell,
+  body.print-thermal .login-screen,
+  body.print-thermal #a4Invoice {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  /* A4: use the full A4 page and scale invoice safely inside it */
+  body.print-a4 {
+    width: 210mm !important;
+    height: 297mm !important;
+  }
+
+  body.print-a4 #a4Invoice {
+    display: flex !important;
+    visibility: visible !important;
+    width: 210mm !important;
+    height: 297mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    page-break-before: avoid !important;
+    page-break-after: avoid !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  body.print-a4 .vt-a4 {
+    width: 198mm !important;
+    min-width: 198mm !important;
+    max-width: 198mm !important;
+    height: 285mm !important;
+    min-height: 285mm !important;
+    max-height: 285mm !important;
+    margin: 3mm auto 0 !important;
+    padding: 0 !important;
+    transform: scale(1.035) !important;
+    transform-origin: top center !important;
+    border: 1.35px solid #0b3f78 !important;
+    box-shadow: none !important;
+    overflow: hidden !important;
+    background: #fff !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  body.print-a4 .vt-a4-header {
+    min-height: 42mm !important;
+    padding: 4.5mm 5mm 3mm !important;
+    grid-template-columns: 31mm 1fr 62mm !important;
+    gap: 4mm !important;
+  }
+
+  body.print-a4 .vt-logo {
+    width: 28mm !important;
+    height: 28mm !important;
+    font-size: 22pt !important;
+  }
+
+  body.print-a4 .vt-company h1 {
+    font-size: 20pt !important;
+    line-height: .98 !important;
+  }
+
+  body.print-a4 .vt-company h2 {
+    font-size: 8.2pt !important;
+    margin-bottom: 1.5mm !important;
+  }
+
+  body.print-a4 .vt-company p,
+  body.print-a4 .vt-company div,
+  body.print-a4 .vt-invoice-meta {
+    font-size: 7.15pt !important;
+  }
+
+  body.print-a4 .vt-title {
+    height: 12mm !important;
+    font-size: 17pt !important;
+  }
+
+  body.print-a4 .vt-two-panels {
+    padding: 0 3mm 2mm !important;
+    gap: 2.2mm !important;
+  }
+
+  body.print-a4 .vt-panel {
+    min-height: 33mm !important;
+    padding: 2.7mm !important;
+  }
+
+  body.print-a4 .vt-items {
+    width: calc(100% - 6mm) !important;
+    margin: 0 3mm !important;
+    font-size: 6.85pt !important;
+  }
+
+  body.print-a4 .vt-items th {
+    padding: 1.45mm .55mm !important;
+  }
+
+  body.print-a4 .vt-items td {
+    height: 7mm !important;
+    padding: 1.35mm .6mm !important;
+  }
+
+  body.print-a4 .vt-lower-grid {
+    margin: 1.8mm 3mm 0 !important;
+  }
+
+  body.print-a4 .vt-bottom-panels {
+    margin: 2.5mm 3mm 0 !important;
+    gap: 2.5mm !important;
+  }
+
+  body.print-a4 .vt-footer {
+    margin-top: 2.6mm !important;
+  }
+
+  /* Thermal: force the browser page to be 80mm, not A4 */
+  body.print-thermal {
+    width: 80mm !important;
+    min-width: 80mm !important;
+    max-width: 80mm !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  body.print-thermal #thermalInvoice {
+    display: block !important;
+    visibility: visible !important;
+    width: 80mm !important;
+    min-width: 80mm !important;
+    max-width: 80mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #fff !important;
+    overflow: visible !important;
+  }
+
+  body.print-thermal .vt-thermal {
+    width: 76mm !important;
+    min-width: 76mm !important;
+    max-width: 76mm !important;
+    margin: 0 auto !important;
+    padding: 3mm 3mm 2.5mm !important;
+    border: none !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  body.print-thermal .vt-t-logo {
+    width: 21mm !important;
+    height: 21mm !important;
+    font-size: 18pt !important;
+  }
+
+  body.print-thermal .vt-thermal h1 {
+    font-size: 17.5pt !important;
+  }
+
+  body.print-thermal .vt-thermal h2 {
+    font-size: 8pt !important;
+  }
+
+  body.print-thermal .vt-thermal .meta {
+    grid-template-columns: 19mm 1fr 16mm 1fr !important;
+    font-size: 7.8pt !important;
+    gap: 1mm 1.4mm !important;
+  }
+
+  body.print-thermal .vt-t-items th,
+  body.print-thermal .vt-t-items td {
+    font-size: 7.8pt !important;
+    padding: 1.15mm .55mm !important;
+  }
+
+  body.print-thermal .vt-t-sum div {
+    min-height: 4.7mm !important;
+  }
+
+  body.print-thermal .vt-t-sum .grand {
+    font-size: 11pt !important;
+  }
+
+  body.print-thermal .vt-t-pay {
+    grid-template-columns: 31mm 1fr !important;
+    padding: 1.8mm !important;
+    gap: 2mm !important;
+  }
+
+  body.print-thermal .vt-t-qr {
+    width: 24mm !important;
+    height: 24mm !important;
+  }
+}
+
+@media screen {
+  #a4Invoice .vt-a4,
+  #thermalInvoice .vt-thermal {
+    transform: none !important;
+  }
+}
+
+
+/* === Billing cart table alignment fix === */
+.add-items-card .billing-cart-wrap,
+.add-items-card .compact-table {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 2px;
+}
+
+.add-items-card .billing-cart-table,
+.add-items-card .compact-table table {
+  width: 100%;
+  min-width: 760px;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.add-items-card .billing-cart-table th,
+.add-items-card .billing-cart-table td,
+.add-items-card .compact-table table th,
+.add-items-card .compact-table table td {
+  vertical-align: middle;
+  box-sizing: border-box;
+  padding: 11px 8px;
+}
+
+.add-items-card .billing-cart-table th,
+.add-items-card .compact-table table th {
+  font-size: 11px;
+  line-height: 1.15;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.add-items-card .billing-cart-table td,
+.add-items-card .compact-table table td {
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.add-items-card .cart-col-sno { width: 4%; }
+.add-items-card .cart-col-product { width: 18%; }
+.add-items-card .cart-col-hsn { width: 10%; }
+.add-items-card .cart-col-unit { width: 8%; }
+.add-items-card .cart-col-qty { width: 6%; }
+.add-items-card .cart-col-rate { width: 11%; }
+.add-items-card .cart-col-taxable { width: 12%; }
+.add-items-card .cart-col-gst { width: 10%; }
+.add-items-card .cart-col-total { width: 12%; }
+.add-items-card .cart-col-action { width: 9%; }
+
+.add-items-card .cart-sno,
+.add-items-card .cart-hsn,
+.add-items-card .cart-unit,
+.add-items-card .cart-qty,
+.add-items-card .cart-gst,
+.add-items-card .cart-action {
+  text-align: center !important;
+}
+
+.add-items-card .cart-product {
+  text-align: left !important;
+  white-space: normal;
+  word-break: break-word;
+}
+
+.add-items-card .cart-money,
+.add-items-card td.num {
+  text-align: right !important;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.add-items-card .cart-gst {
+  white-space: nowrap;
+  line-height: 1.05;
+}
+
+.add-items-card .cart-gst span,
+.add-items-card .cart-gst small {
+  display: block;
+  text-align: center;
+}
+
+.add-items-card .cart-gst small {
+  margin-top: 2px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.add-items-card .cart-total strong {
+  display: inline-block;
+  min-width: 66px;
+}
+
+.add-items-card .cart-action .delete,
+.add-items-card .cart-action button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 62px;
+  padding: 7px 9px;
+  white-space: nowrap;
+}
+
+
+
+/* ===== FIX: Available Stock table alignment only ===== */
+
+.live-stock-card .table-wrap,
+.stock-table-card .table-wrap {
+  overflow-x: hidden !important;
+}
+
+.live-stock-card table,
+.stock-table-card table {
+  width: 100% !important;
+  min-width: 0 !important;
+  table-layout: fixed !important;
+}
+
+.live-stock-card th,
+.live-stock-card td,
+.stock-table-card th,
+.stock-table-card td {
+  vertical-align: middle !important;
+  white-space: normal !important;
+}
+
+/* Billing page Available Stock (Live) - 8 columns */
+.live-stock-card th:nth-child(1),
+.live-stock-card td:nth-child(1) {
+  width: 30% !important;
+  text-align: left !important;
+}
+
+.live-stock-card th:nth-child(2),
+.live-stock-card td:nth-child(2) {
+  width: 10% !important;
+  text-align: center !important;
+}
+
+.live-stock-card th:nth-child(3),
+.live-stock-card td:nth-child(3) {
+  width: 8% !important;
+  text-align: center !important;
+}
+
+.live-stock-card th:nth-child(4),
+.live-stock-card td:nth-child(4) {
+  width: 12% !important;
+  text-align: right !important;
+  white-space: nowrap !important;
+}
+
+.live-stock-card th:nth-child(5),
+.live-stock-card td:nth-child(5) {
+  width: 8% !important;
+  text-align: center !important;
+}
+
+.live-stock-card th:nth-child(6),
+.live-stock-card td:nth-child(6) {
+  width: 8% !important;
+  text-align: center !important;
+}
+
+.live-stock-card th:nth-child(7),
+.live-stock-card td:nth-child(7) {
+  width: 14% !important;
+  text-align: center !important;
+}
+
+.live-stock-card th:nth-child(8),
+.live-stock-card td:nth-child(8) {
+  width: 10% !important;
+  text-align: center !important;
+}
+
+/* Stock Management page Available Stock - 9 columns */
+.stock-table-card th:nth-child(1),
+.stock-table-card td:nth-child(1) {
+  width: 28% !important;
+  text-align: left !important;
+}
+
+.stock-table-card th:nth-child(2),
+.stock-table-card td:nth-child(2) {
+  width: 9% !important;
+  text-align: center !important;
+}
+
+.stock-table-card th:nth-child(3),
+.stock-table-card td:nth-child(3) {
+  width: 8% !important;
+  text-align: center !important;
+}
+
+.stock-table-card th:nth-child(4),
+.stock-table-card td:nth-child(4) {
+  width: 11% !important;
+  text-align: right !important;
+  white-space: nowrap !important;
+}
+
+.stock-table-card th:nth-child(5),
+.stock-table-card td:nth-child(5) {
+  width: 7% !important;
+  text-align: center !important;
+}
+
+.stock-table-card th:nth-child(6),
+.stock-table-card td:nth-child(6) {
+  width: 8% !important;
+  text-align: center !important;
+}
+
+.stock-table-card th:nth-child(7),
+.stock-table-card td:nth-child(7) {
+  width: 9% !important;
+  text-align: center !important;
+}
+
+.stock-table-card th:nth-child(8),
+.stock-table-card td:nth-child(8) {
+  width: 12% !important;
+  text-align: center !important;
+}
+
+.stock-table-card th:nth-child(9),
+.stock-table-card td:nth-child(9) {
+  width: 8% !important;
+  text-align: center !important;
+}
+
+/* ===== Real Invoice History Date Filter ===== */
+.date-filter-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.date-pill {
+  cursor: pointer;
+  gap: 6px;
+}
+
+.date-filter-panel {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  z-index: 50;
+  width: 310px;
+  padding: 14px;
+  background: #fff;
+  border: 1px solid #d8e3f2;
+  border-radius: 14px;
+  box-shadow: 0 18px 40px rgba(12, 31, 60, .16);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.date-filter-panel.hidden {
+  display: none !important;
+}
+
+.date-filter-panel label {
+  font-size: 11px;
+}
+
+.date-filter-panel input {
+  padding: 9px 10px;
+  font-size: 12px;
+}
+
+.date-filter-actions {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.small-action {
+  min-height: 36px !important;
+  height: 36px !important;
+  padding: 0 12px !important;
+  border-radius: 9px !important;
+}
+
+.page-size-select {
+  width: auto !important;
+  min-width: 120px;
+  height: 38px;
+  min-height: 38px !important;
+  padding: 0 12px !important;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+/* ===== FIX: Invoice History table alignment only ===== */
+.history-table-card {
+  overflow: hidden !important;
+}
+
+.history-table-card .table-wrap {
+  width: 100% !important;
+  overflow-x: auto !important;
+}
+
+.history-table-card .invoice-history-table {
+  width: 100% !important;
+  min-width: 1220px !important;
+  table-layout: fixed !important;
+}
+
+.history-table-card .invoice-history-table th,
+.history-table-card .invoice-history-table td {
+  padding: 12px 8px !important;
+  vertical-align: middle !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.history-table-card .invoice-history-table th:nth-child(1),
+.history-table-card .invoice-history-table td:nth-child(1) {
+  width: 16% !important;
+  text-align: left !important;
+}
+
+.history-table-card .invoice-history-table th:nth-child(2),
+.history-table-card .invoice-history-table td:nth-child(2) {
+  width: 10% !important;
+  text-align: left !important;
+}
+
+.history-table-card .invoice-history-table th:nth-child(3),
+.history-table-card .invoice-history-table td:nth-child(3) {
+  width: 15% !important;
+  text-align: left !important;
+}
+
+.history-table-card .invoice-history-table th:nth-child(4),
+.history-table-card .invoice-history-table td:nth-child(4) {
+  width: 6% !important;
+  text-align: center !important;
+}
+
+.history-table-card .invoice-history-table th:nth-child(5),
+.history-table-card .invoice-history-table td:nth-child(5),
+.history-table-card .invoice-history-table th:nth-child(6),
+.history-table-card .invoice-history-table td:nth-child(6),
+.history-table-card .invoice-history-table th:nth-child(7),
+.history-table-card .invoice-history-table td:nth-child(7) {
+  width: 9% !important;
+  text-align: right !important;
+}
+
+.history-table-card .invoice-history-table th:nth-child(8),
+.history-table-card .invoice-history-table td:nth-child(8) {
+  width: 8% !important;
+  text-align: center !important;
+}
+
+.history-table-card .invoice-history-table th:nth-child(9),
+.history-table-card .invoice-history-table td:nth-child(9) {
+  width: 18% !important;
+  text-align: left !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+}
+
+.history-table-card .invoice-history-table .status-badge {
+  margin: 0 auto !important;
+}
+
+.history-table-card .invoice-history-table .row-actions {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  flex-wrap: nowrap !important;
+  gap: 6px !important;
+}
+
+.history-table-card .invoice-history-table .icon-btn {
+  height: 30px !important;
+  padding: 0 9px !important;
+  white-space: nowrap !important;
+  flex: 0 0 auto !important;
+}
+
+.history-table-card .table-footer {
+  align-items: center !important;
+}
