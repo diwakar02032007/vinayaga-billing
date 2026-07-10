@@ -1215,6 +1215,10 @@ function getBusinessInitials(name) {
   const text = String(name || "Business").trim();
   const words = text.split(/\s+/).filter(Boolean);
 
+  if (words.length >= 3) {
+    return words.slice(0, 3).map(w => w[0]).join("").toUpperCase();
+  }
+
   if (words.length >= 2) {
     return (words[0][0] + words[1][0]).toUpperCase();
   }
@@ -1337,6 +1341,32 @@ function renderPrintTemplates(invoice) {
   $('thermalInvoice').innerHTML = buildThermalInvoice(invoice);
 }
 
+function buildBrandNameA4Html(name) {
+  const text = String(name || 'Sri Vinayaga Traders').trim().toUpperCase();
+  const words = text.split(/\s+/).filter(Boolean);
+
+  if (words.length >= 2) {
+    const firstPart = words.slice(0, -1).join(' ');
+    const lastPart = words[words.length - 1];
+    return `<span>${escapeHtml(firstPart)}</span> ${escapeHtml(lastPart)}`;
+  }
+
+  return escapeHtml(text || 'SRI VINAYAGA TRADERS');
+}
+
+function buildBrandNameThermalHtml(name) {
+  const text = String(name || 'Sri Vinayaga Traders').trim().toUpperCase();
+  const words = text.split(/\s+/).filter(Boolean);
+
+  if (words.length >= 2) {
+    const firstPart = words.slice(0, -1).join(' ');
+    const lastPart = words[words.length - 1];
+    return `${escapeHtml(firstPart)}<br><em>${escapeHtml(lastPart)}</em>`;
+  }
+
+  return escapeHtml(text || 'SRI VINAYAGA TRADERS');
+}
+
 function buildA4Invoice(invoice) {
   const s = state.settings || {};
   const customer = invoice.customer || {};
@@ -1409,9 +1439,9 @@ function buildA4Invoice(invoice) {
   return `
     <div class="vt-a4">
       <header class="vt-a4-header">
-        <div class="svt-a4-logo" style="width:25mm;height:25mm;border:1.3px solid #0b3f78;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#0b3f78;font-size:17pt;font-weight:950;letter-spacing:-1px;margin:0 auto;background:#fff;box-sizing:border-box;">SVT</div>
+        <div class="vt-logo"><span>SVT</span></div>
         <div class="vt-company">
-          <h1>${escapeHtml(businessName)}</h1>
+          <h1>${buildBrandNameA4Html(businessName)}</h1>
           <h2>${escapeHtml(tagline)}</h2>
           <p>📍 ${escapeHtml(businessAddress)}</p>
           <p>☎ ${escapeHtml(businessPhone)} <b>|</b> ✉ ${escapeHtml(businessEmail)} <b>|</b> 🌐 ${escapeHtml(businessWebsite)}</p>
@@ -1525,8 +1555,8 @@ function buildThermalInvoice(invoice) {
 
   return `
     <div class="vt-thermal">
-      <div class="svt-t-logo" style="width:12mm;height:12mm;border:1px solid #0b3f78;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#0b3f78;font-size:8pt;font-weight:950;margin:0 auto 0.8mm;background:#fff;box-sizing:border-box;line-height:1;">SVT</div>
-      <h1>${escapeHtml(businessName)}</h1>
+      <div class="vt-t-logo"><span>SVT</span></div>
+      <h1>${buildBrandNameThermalHtml(businessName)}</h1>
       <h2>${escapeHtml(s.businessTagline || 'Manufacturing & Supply of Precision Tools & Room Components')}</h2>
       <p class="addr">📍 ${escapeHtml(businessAddress)}</p>
       <p>☎ ${escapeHtml(businessPhone)}</p>
@@ -2574,20 +2604,36 @@ function getStandaloneThermalCss() {
     }
 
     .vt-t-logo {
-    .vt-t-logo-img {
-  width: 12mm !important;
-  height: 12mm !important;
-  max-width: 12mm !important;
-  max-height: 12mm !important;
-  object-fit: contain !important;
-  display: block !important;
-  margin: 0 auto 0.8mm !important;
-}
-      width: 21mm; height: 21mm; margin: 0 auto 1mm; border: 1px solid #0b3f78; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center; position: relative; color: #0b3f78; font-size: 17pt; font-weight: 900;
+      width: 12mm;
+      height: 12mm;
+      margin: 0 auto 0.8mm;
+      border: 1px solid #0b3f78;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      color: #0b3f78;
+      font-size: 8pt;
+      font-weight: 900;
+      background: #fff;
+      line-height: 1;
+      overflow: hidden;
     }
-    .vt-t-logo::after { content: ''; position: absolute; left: 4mm; bottom: 5mm; width: 14mm; height: 2mm; background: #15803d; transform: skewX(-24deg); border-radius: 2mm; }
-    .vt-t-logo span { position: relative; z-index: 2; }
+
+    .vt-t-logo::after {
+      content: '';
+      position: absolute;
+      left: 2.3mm;
+      bottom: 2.8mm;
+      width: 7.4mm;
+      height: 1.1mm;
+      background: #15803d;
+      transform: skewX(-24deg);
+      border-radius: 2mm;
+    }
+
+    .vt-t-logo span { position: relative; z-index: 2; letter-spacing: -0.5px; }
 
     .vt-thermal h1 { margin: 0; text-align: center; font-size: 18pt; line-height: 0.95; color: #0b3f78; font-weight: 900; }
     .vt-thermal h1 em { color: #15803d; font-style: normal; }
