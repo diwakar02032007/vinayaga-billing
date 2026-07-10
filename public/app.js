@@ -37,7 +37,7 @@ const STORAGE_KEYS = {
 };
 
 const defaultSettings = {
-  businessName: 'Vinayaga Traders',
+  businessName: 'Sri Vinayaga Traders',
   businessTagline: 'Wholesale & Distribution of Quality Food Products',
   businessGstin: '33CORPP3939N1ZQ',
   businessPhone: '9876543210',
@@ -1340,7 +1340,7 @@ function renderPrintTemplates(invoice) {
 function buildA4Invoice(invoice) {
   const s = state.settings || {};
   const customer = invoice.customer || {};
-  const businessName = 'Vinayaga Traders';
+  const businessName = s.businessName || 'Sri Vinayaga Traders';
   const tagline = s.businessTagline || 'Manufacturing & Supply of Precision Tools & Room Components';
   const businessAddress = s.businessAddress || 'No. 12/3, SIDCO Industrial Estate, Coimbatore Main Road, Kurichi, Coimbatore - 641 021, Tamil Nadu, India.';
   const businessPhone = s.businessPhone || '+91 98422 45000';
@@ -1409,9 +1409,9 @@ function buildA4Invoice(invoice) {
   return `
     <div class="vt-a4">
       <header class="vt-a4-header">
-        <img class="vt-logo-img" src="${new URL('assets/assets/reference/reference/vt-logo.png', window.location.href).href}" alt="Vinayaga Traders Logo">
+        <div class="svt-a4-logo" style="width:25mm;height:25mm;border:1.3px solid #0b3f78;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#0b3f78;font-size:17pt;font-weight:950;letter-spacing:-1px;margin:0 auto;background:#fff;box-sizing:border-box;">SVT</div>
         <div class="vt-company">
-          <h1><span>VINAYAGA</span> TRADERS</h1>
+          <h1>${escapeHtml(businessName)}</h1>
           <h2>${escapeHtml(tagline)}</h2>
           <p>📍 ${escapeHtml(businessAddress)}</p>
           <p>☎ ${escapeHtml(businessPhone)} <b>|</b> ✉ ${escapeHtml(businessEmail)} <b>|</b> 🌐 ${escapeHtml(businessWebsite)}</p>
@@ -1497,7 +1497,7 @@ function buildA4Invoice(invoice) {
 
       <section class="vt-bottom-panels">
         <div class="vt-terms"><h4>▣ TERMS & CONDITIONS</h4><ol>${termsHtml}</ol></div>
-        <div class="vt-sign"><h4>✒ FOR VINAYAGA TRADERS</h4><div></div><b>AUTHORIZED SIGNATORY</b></div>
+        <div class="vt-sign"><h4>✒ FOR ${escapeHtml(businessName).toUpperCase()}</h4><div></div><b>AUTHORIZED SIGNATORY</b></div>
       </section>
 
       <footer class="vt-footer"><span>☎ ${escapeHtml(businessPhone)}</span><span>✉ ${escapeHtml(businessEmail)}</span><span>🌐 ${escapeHtml(businessWebsite)}</span></footer>
@@ -1507,7 +1507,7 @@ function buildA4Invoice(invoice) {
 function buildThermalInvoice(invoice) {
   const s = state.settings || {};
   const customer = invoice.customer || {};
-  const businessName = 'Vinayaga Traders';
+  const businessName = s.businessName || 'Sri Vinayaga Traders';
   const businessAddress = s.businessAddress || 'No. 12/3, SIDCO Industrial Estate, Coimbatore - 641 021, Tamil Nadu, India.';
   const businessPhone = s.businessPhone || '+91 98422 45000';
   const gstin = s.businessGstin || '33AACFV1234F1Z6';
@@ -1525,8 +1525,8 @@ function buildThermalInvoice(invoice) {
 
   return `
     <div class="vt-thermal">
-      <img class="vt-t-logo-img" src="${new URL('assets/assets/reference/reference/vt-logo.png', window.location.href).href}" alt="Vinayaga Traders Logo" style="width:12mm !important;height:12mm !important;max-width:12mm !important;max-height:12mm !important;object-fit:contain !important;display:block !important;margin:0 auto 0.8mm !important;">
-      <h1>VINAYAGA<br><em>TRADERS</em></h1>
+      <div class="svt-t-logo" style="width:12mm;height:12mm;border:1px solid #0b3f78;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#0b3f78;font-size:8pt;font-weight:950;margin:0 auto 0.8mm;background:#fff;box-sizing:border-box;line-height:1;">SVT</div>
+      <h1>${escapeHtml(businessName)}</h1>
       <h2>${escapeHtml(s.businessTagline || 'Manufacturing & Supply of Precision Tools & Room Components')}</h2>
       <p class="addr">📍 ${escapeHtml(businessAddress)}</p>
       <p>☎ ${escapeHtml(businessPhone)}</p>
@@ -2078,7 +2078,7 @@ function printSampleInvoice(mode, invoice = null) {
 function openStandalonePrint(mode, invoice) {
   const html = mode === 'thermal' ? buildThermalInvoice(invoice) : buildA4Invoice(invoice);
   const css = mode === 'thermal' ? getStandaloneThermalCss() : getStandaloneA4Css();
-  const title = mode === 'thermal' ? 'Vinayaga Traders Thermal Bill' : 'Vinayaga Traders A4 Invoice';
+  const title = mode === 'thermal' ? `${state.settings?.businessName || 'Sri Vinayaga Traders'} Thermal Bill` : `${state.settings?.businessName || 'Sri Vinayaga Traders'} A4 Invoice`;
 
   const printWindow = window.open('', '_blank', 'width=1000,height=800');
   if (!printWindow) {
