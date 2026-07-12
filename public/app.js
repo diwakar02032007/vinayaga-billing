@@ -2161,6 +2161,7 @@ function getStandaloneA4Css() {
       border-bottom: 1px solid #0b3f78;
       padding-bottom: 1.5mm;
       overflow: hidden;
+      margin-bottom: 1.6mm;
     }
 
     .vt-logo {
