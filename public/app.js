@@ -1369,7 +1369,7 @@ function buildA4Invoice(invoice) {
   const termsSource = invoice.notes || s.terms || 'Goods once sold will not be taken back or exchanged.\nInterest @ 18% p.a. will be charged on overdue payments.\nAll disputes are subject to Coimbatore Jurisdiction only.\nPayment to be made by NEFT / UPI only.\nResponsibility ceases once goods leave our premises.';
   const termsHtml = termsSource.split('\n').filter(Boolean).slice(0, 5).map((line, i) => `<li>${escapeHtml(line.replace(/^\d+\.\s*/, ''))}</li>`).join('');
 
-  const rows = invoice.items.slice(0, 20).map((item, index) => {
+  const rows = invoice.items.map((item, index) => {
     const qty = Number(item.qty || 0);
     const unit = item.unit || 'Nos';
     const rate = Number(item.rate || 0);
