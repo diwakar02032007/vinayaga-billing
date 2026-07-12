@@ -2276,6 +2276,7 @@ function getStandaloneA4Css() {
       font-size: 16pt;
       font-weight: 900;
       letter-spacing: .4px;
+      margin-bottom: 1.6mm;
     }
 
     .vt-title span {
@@ -2300,6 +2301,7 @@ function getStandaloneA4Css() {
       grid-template-columns: 1fr 1fr;
       gap: 2mm;
       height: 34mm;
+      margin-bottom: 1.6mm;
     }
 
     .vt-panel {
@@ -2336,11 +2338,14 @@ function getStandaloneA4Css() {
 
     .vt-items {
       width: 100%;
-      height: 94mm;
+      height: auto;
+      min-height: 94mm;
       table-layout: fixed;
       border-collapse: collapse;
       font-size: 6.35pt;
       line-height: 1.12;
+      margin-bottom: 1.6mm;
+      page-break-inside: auto;
     }
 
     .vt-items col.sno { width: 6mm; }
@@ -2374,6 +2379,8 @@ function getStandaloneA4Css() {
       color: #111827;
       overflow: hidden;
       vertical-align: middle;
+      page-break-inside: avoid;
+      break-inside: avoid;
     }
 
     .vt-items .desc { text-align: left; font-weight: 800; }
@@ -2388,6 +2395,9 @@ function getStandaloneA4Css() {
       grid-template-columns: 1.18fr 1fr;
       gap: 2mm;
       overflow: hidden;
+      margin-bottom: 1.6mm;
+      page-break-inside: avoid;
+      break-inside: avoid;
     }
 
     .vt-left-block {
@@ -2526,6 +2536,9 @@ function getStandaloneA4Css() {
       grid-template-columns: 1fr 1fr;
       gap: 2mm;
       overflow: hidden;
+      margin-bottom: 1.6mm;
+      page-break-inside: avoid;
+      break-inside: avoid;
     }
 
     .vt-terms, .vt-sign {
