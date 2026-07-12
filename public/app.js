@@ -2255,7 +2255,7 @@ function getStandaloneA4Css() {
   grid-template-columns: 22mm 1fr;
   gap: 1mm;
   margin-bottom: 0.65mm;
-}s
+}
 
     .vt-invoice-meta b { color: #0b3f78; }
     .vt-invoice-meta span { font-weight: 700; color: #111827; }
