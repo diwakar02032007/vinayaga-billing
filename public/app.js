@@ -2135,17 +2135,23 @@ function getStandaloneA4Css() {
     }
 
     .vt-a4 {
-      width: 196mm;
-      height: 283mm;
-      padding: 3.2mm;
-      margin: 0 auto;
-      background: #ffffff;
-      border: 1.2px solid #0b3f78;
-      overflow: hidden;
-      display: grid;
-      grid-template-rows: 34mm 10mm 34mm 94mm 49mm 34mm 8mm 4mm;
-      gap: 1.6mm;
-    }
+  width: 196mm;
+  min-height: 283mm;
+  height: auto;
+  padding: 3.2mm;
+  margin: 0 auto;
+  background: #ffffff;
+  border: 1.2px solid #0b3f78;
+  overflow: visible;
+  display: block;
+  break-after: page;
+  page-break-after: always;
+}
+
+.vt-a4:last-child {
+  break-after: auto;
+  page-break-after: auto;
+}
 
     .vt-a4-header {
       display: grid;
