@@ -566,6 +566,7 @@ async function saveInvoice(showAlert = false) {
   const stateCode = stateCodeMatch ? stateCodeMatch[1] : '33';
 
   const payload = {
+    invoice_no: invoice.invoiceNo,
     invoice_date: invoice.invoiceDate,
     customer: {
       name: invoice.customer.name,
